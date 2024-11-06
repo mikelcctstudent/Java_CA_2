@@ -11,14 +11,14 @@ package CA_2;// This is the package to which the interface HospitalMenu belongs
 public interface HospitalMenu {
 // These are the menu options we would like to present to the user for the main menu options
 
-    enum MenuOptions {
+    enum MenuOption {
         MANAGE_EMPLOYEES,//0
         MANAGE_PATIENTS,//1
         EXIT//2
     }
 //  These are the menu options we would like to present to the user for the sub menu employees
 
-    enum SubMenuEmployees {
+    enum SubMenuEmployee {
         SORT,//0
         SEARCH,//1
         ADD_EMPLOYEE,//2
@@ -28,7 +28,7 @@ public interface HospitalMenu {
     }
 //  These are the menu options we would like to present to the user for the sub menu patients
 
-    enum SubMenuPatients {
+    enum SubMenuPatient {
         SORT,//0
         SEARCH,//1
         ADD_PATIENTS,//2
@@ -42,9 +42,16 @@ public interface HospitalMenu {
 
         SEARCH_BY_NAME//0
     }
+    
 //  These are the menu options we would like to present to the user for show list options patients
 
-    enum ShowListOptionPatients {
+     enum SearchOption {
+        SEARCH_BY_NAME
+    }
+    
+//  These are the menu options we would like to present to the user for show list options patients
+
+    enum ShowListOptionPatient {
         SHOW_SORTED_PATIENTS,//0
         SHOW_SORTED_SCHEDULES//1
     }
