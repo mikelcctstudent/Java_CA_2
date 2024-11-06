@@ -5,7 +5,9 @@
 package CA_2;// This is the package to which the class HospitalFileManager belongs
 
 import java.io.BufferedReader; // This imports for efficient reading of text from an input stream.
+import java.io.BufferedWriter;
 import java.io.FileReader; // This imports for reading data from files.
+import java.io.FileWriter;
 import java.io.IOException; // This imports to handle input and output exceptions.
 import java.math.BigDecimal; // This imports for precise calculations with decimal numbers, ideal for financial values.
 import java.time.LocalDate; // This imports for date manipulation (without time).
@@ -13,20 +15,16 @@ import java.time.LocalTime; // This imports for time manipulation (without date)
 import java.time.format.DateTimeParseException; // This imports to handle date/time format errors.
 import java.util.ArrayList; // This imports to use a resizable list.
 import java.util.List; // This imports the List interface to manage collections of objects.
-    
+
 /**
- ** Class for managing file operations such as reading 
- * data and creating lists of employees and patients.
+ ** Class for managing file operations such as reading data and creating lists
+ * of employees and patients.
+ *
  * @author Mikel
  */
 public class HospitalFileManager {
 
-    /**
-     * This class Reads the employee file and returns a list of Employee objects.
-     * @param fileName The name of the file to be read.
-     * @return List of Employee objects.
-     * @throws IOException If an I/O error occurs.
-     */
+//  This class Reads the employee file and returns a list of Employee
     public static List<Employee> readEmployeesFile(String fileName) throws IOException {
         List<Employee> employees = new ArrayList<>(); // Create a list to store employees.
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) { // Open the file for reading.
@@ -168,12 +166,7 @@ public class HospitalFileManager {
         return employees; // Return the list of employees.
     }
 
-    /**
-     * Reads the patient file and returns a list of Patient objects.
-     * @param filePath The path of the file to be read.
-     * @return List of Patient objects.
-     * @throws IOException If an I/O error occurs.
-     */
+//This file reads the patient file and returns a list of Patient objects.
     public static List<Patient> readPatientsFile(String filePath) throws IOException {
         List<Patient> patients = new ArrayList<>(); // Create a list to store patients.
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) { // Open the file for reading.
@@ -268,12 +261,7 @@ public class HospitalFileManager {
         return patients; // Return the list of patients.
     }
 
-    /**
-     * Reads the applicants_form.txt and returns the lines as a list of strings.
-     * @param fileName The name of the file to be read.
-     * @return List of strings, each representing a line from the file.
-     * @throws IOException If an I/O error occurs.
-     */
+//This method read the applicants_form.txt and returns the lines as a list of strings.
     public static List<String> readApplicantsForm(String fileName) throws IOException {
         List<String> lines = new ArrayList<>(); // Create a list to store the lines from the file.
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) { // Open the file for reading.
@@ -287,6 +275,102 @@ public class HospitalFileManager {
             System.out.println("Error reading applicants form: " + e.getMessage()); // Print an error message if file reading fails.
         }
         return lines; // Return the list of lines from the file.
+    }
+
+//  This method will read a file containing names and returns a list of names.
+    public static List<String> readNamesForSorting(String fileName) throws IOException {
+        List<String> names = new ArrayList<>(); // List to store names from the file.
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) { // Open the file for reading.
+            String line; // Variable to store each line read from the file.
+            while ((line = reader.readLine()) != null) { // Read each line of the file until the end.
+                if (!line.trim().isEmpty()) { // Check if the line is not empty after trimming spaces.
+                    names.add(line.trim()); // Add the trimmed line (name) to the list.
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading names for sorting: " + e.getMessage()); // Error message if the reading fails.
+        }
+        return names; // Return the list of names.
+    }
+
+//  In this method created will write the employee information to a file created into the project folder
+    public static void writeEmployeeToFile(Employee employee, String filePath) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // Open the file for writing, appending new data.
+            // Write general employee information to the file.
+            writer.write("Name: " + employee.getName() + "\n");
+            writer.write("Date of Birth: " + employee.getDateOfBirth() + "\n");
+            writer.write("Address: " + employee.getAddress() + "\n");
+            writer.write("Salary: " + employee.getSalary() + " EUR\n");
+            writer.write("DepartmentOption: " + employee.getDepartmentType().name() + "\n");
+            writer.write("Role: " + employee.getManagerType().name() + "\n");
+            writer.write("Position: " + employee.getPositionType().name() + "\n");
+
+            String type = employee.getType(); // Retrieve the specific type of employee.
+            writer.write("Type: " + type + "\n");
+
+            // Write additional information specific to each type of employee.
+            switch (type) {
+                case "Doctor":
+                    Doctor doctor = (Doctor) employee; // Cast the employee to Doctor type.
+                    writer.write("Specialty: " + doctor.getMedicalSpecialty() + "\n");
+                    writer.write("License: " + doctor.getLicenseNumber() + "\n");
+                    break;
+                case "Nurse":
+                    Nurse nurse = (Nurse) employee; // Cast the employee to Nurse type.
+                    writer.write("Shift: " + nurse.getShift() + "\n");
+                    writer.write("Specialization: " + nurse.getSpecialization() + "\n");
+                    break;
+                case "AdministrativeAssistant":
+                    AdministrativeAssistant admin = (AdministrativeAssistant) employee; // Cast the employee to AdministrativeAssistant type.
+                    writer.write("Role: " + admin.getResponsibility() + "\n");
+                    break;
+                case "GeneralStaff":
+                    GeneralStaff generalStaff = (GeneralStaff) employee; // Cast the employee to GeneralStaff type.
+                    writer.write("Job Description: " + generalStaff.getJobDescription() + "\n");
+                    break;
+                default:
+                    // If none of the specific types match, fall back to generic Employee type.
+                    break;
+            }
+
+            writer.write("\n"); // Add a blank line between employee entries.
+        }
+    }
+
+// This method will write the patient information to a file created into the project folder
+    public static void writePatientToFile(Patient patient, String filePath) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // Open the file for writing, appending new data.
+            // Write general patient information to the file.
+            writer.write("Name: " + patient.getName() + "\n");
+            writer.write("Date of Birth: " + patient.getDateOfBirth() + "\n");
+            writer.write("Address: " + patient.getAddress() + "\n");
+            writer.write("Medical Issue: " + patient.getMedicalIssue() + "\n");
+            writer.write("Medical Department: " + patient.getMedicalDepartment().name() + "\n");
+            writer.write("Doctor: " + patient.getDoctorName() + "\n");
+            writer.write("Consultation Fee: " + patient.getConsultationFee() + "\n");
+            writer.write("Appointment Date: " + patient.getAppointmentDate() + "\n");
+            writer.write("Appointment Time: " + patient.getAppointmentTime() + "\n");
+            writer.write("Payment Status: " + patient.getPaymentStatus() + "\n");
+            writer.write("\n"); // Add a blank line between patient entries.
+        }
+    }
+
+// And this method will write the patient appointment to a file created into the project folder
+    public static void writeAppointmentToFile(Patient patient, String filePath) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // Open the file for writing, appending new data.
+            // Write patient appointment information to the file.
+            writer.write("Name: " + patient.getName() + "\n");
+            writer.write("Date of Birth: " + patient.getDateOfBirth() + "\n");
+            writer.write("Address: " + patient.getAddress() + "\n");
+            writer.write("Medical Issue: " + patient.getMedicalIssue() + "\n");
+            writer.write("Medical Department: " + patient.getMedicalDepartment().name() + "\n");
+            writer.write("Doctor: " + patient.getDoctorName() + "\n");
+            writer.write("Consultation Fee: " + patient.getConsultationFee() + "\n");
+            writer.write("Appointment Date: " + patient.getAppointmentDate() + "\n");
+            writer.write("Appointment Time: " + patient.getAppointmentTime() + "\n");
+            writer.write("Payment Status: " + patient.getPaymentStatus() + "\n");
+            writer.write("\n"); // Add a blank line between appointment entries.
+        }
     }
     
     
