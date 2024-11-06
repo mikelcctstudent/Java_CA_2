@@ -15,7 +15,7 @@ public interface PositionType {
         RESIDENT_PHYSICIAN, //1
         HOSPITAL_ADMINISTRATIVE_ASSISTANT,//2
         DEPARTMENT_HEAD,//3
-        STAFF_NURSE,//4
+        RADIOLOGY_NURSE,//4
         CLEANING_STAFF//5
     }
     
