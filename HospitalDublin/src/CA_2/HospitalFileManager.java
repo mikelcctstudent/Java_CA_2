@@ -23,6 +23,10 @@ import java.util.List; // This imports the List interface to manage collections 
  * @author Mikel
  */
 public class HospitalFileManager {
+//  This file was created into the project folder to exported sorted exployees
+    private static final String SORTED_EMPLOYEES_FILE = "sorted_employees.txt";
+    //  This file was created into the project folder to exported sorted patients
+    private static final String SORTED_PATIENTS_FILE = "sorted_patients.txt";
 
 //  This class Reads the employee file and returns a list of Employee
     public static List<Employee> readEmployeesFile(String fileName) throws IOException {
@@ -293,6 +297,66 @@ public class HospitalFileManager {
         return names; // Return the list of names.
     }
 
+//    Exports a sorted list of patients to a file.
+    public static void exportSortedPatientsToFile(List<Patient> patients) {
+        try {
+            // Clears the content of the SORTED_PATIENTS_FILE before writing new data.
+            clearAllFiles(SORTED_PATIENTS_FILE);
+
+            // Iterate through each patient in the list.
+            for (Patient patient : patients) {
+                // Writes each patient's information to the SORTED_PATIENTS_FILE.
+                writePatientToFile(patient, SORTED_PATIENTS_FILE);
+            }
+
+            // Print a success message after exporting the list.
+            System.out.println("Sorted patient list exported successfully to 'sorted_patients.txt'.");
+        } catch (IOException e) {
+            // Print an error message if an I/O error occurs.
+            System.out.println("Error exporting sorted patient list: " + e.getMessage());
+        }
+    }
+
+//    Exports a sorted list of employees to a file.
+    public static void exportSortedEmployeesToFile(List<Employee> employees) {
+        try {
+            // Clears the content of the SORTED_EMPLOYEES_FILE before writing new data.
+            clearAllFiles(SORTED_EMPLOYEES_FILE);
+
+            // Iterate through each employee in the list.
+            for (Employee employee : employees) {
+                // Writes each employee's information to the SORTED_EMPLOYEES_FILE.
+                writeEmployeeToFile(employee, SORTED_EMPLOYEES_FILE);
+            }
+
+            // Print a success message after exporting the list.
+            System.out.println("Sorted list of employees exported successfully to " + SORTED_EMPLOYEES_FILE);
+        } catch (IOException e) {
+            // Print an error message if an I/O error occurs.
+            System.out.println("Error exporting sorted employees to file: " + e.getMessage());
+        }
+    }
+
+//   Exports a sorted list of patient appointments to a file.
+    public static void exportSortedAppointmentsToFile(List<Patient> appointments) {
+        try {
+            // Clears the content of the "sorted_appointments.txt" file before writing new data.
+            clearAllFiles("sorted_appointments.txt");
+
+            // Iterate through each appointment in the list.
+            for (Patient appointment : appointments) {
+                // Writes each appointment's information to the "sorted_appointments.txt" file.
+                writeAppointmentToFile(appointment, "sorted_appointments.txt");
+            }
+
+            // Print a success message after exporting the list.
+            System.out.println("Sorted appointment list exported successfully to 'sorted_appointments.txt'.");
+        } catch (IOException e) {
+            // Print an error message if an I/O error occurs.
+            System.out.println("Error exporting sorted appointment list: " + e.getMessage());
+        }
+    }
+    
 //  In this method created will write the employee information to a file created into the project folder
     public static void writeEmployeeToFile(Employee employee, String filePath) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // Open the file for writing, appending new data.
@@ -372,6 +436,13 @@ public class HospitalFileManager {
             writer.write("\n"); // Add a blank line between appointment entries.
         }
     }
-    
-    
+
+//    Clears the content of the specified file.
+    public static void clearAllFiles(String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write("");
+        } catch (IOException e) {
+            System.out.println("Error clearing the file: " + e.getMessage());
+        }
+    }
 }

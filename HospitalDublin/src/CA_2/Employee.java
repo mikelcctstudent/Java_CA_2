@@ -64,7 +64,7 @@ public class Employee extends Person { //This class employee will extends the ab
     public String toString() {
         return "\nName: " + getName()
                 + "\nDate of Birth: " + getDateOfBirth()
-                + "\nAddress: " + getAdress()
+                + "\nAddress: " + getAddress()
                 + "\nDepartment: " + departmentOption
                 + "\nSalary: " + getSalary()
                 + "\nManager: " + managerOption

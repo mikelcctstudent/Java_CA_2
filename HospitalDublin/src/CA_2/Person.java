@@ -33,7 +33,7 @@ public abstract class Person { // Declares anabstract class called person that c
         return dateOfBirth;
     }
 //   this method to get the value of address
-    public String getAdress(){
+    public String getAddress(){
         return address;
     }
 //  This abstract method to ensure that subclasses define their type
