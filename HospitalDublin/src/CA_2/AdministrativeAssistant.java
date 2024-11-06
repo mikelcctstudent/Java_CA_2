@@ -15,7 +15,7 @@ public class AdministrativeAssistant extends Employee { // Declares the class th
 
     private final String responsibility; //This a private attribute called responsibility of type String
 
-    public AdministrativeAssistant(String name, LocalDate dateOfBirth, String address, BigDecimal salary, DepartmentType.DepartmentOption departmentOption, ManagerType.ManagerOption managerOption, PositionType.PositionOption positionOption, String responsibility) {
+    public AdministrativeAssistant(String name, LocalDate dateOfBirth, String address, BigDecimal salary, DepartmentType.DepartmentOption departmentOption, RoleType.ManagerOption managerOption, PositionType.PositionOption positionOption, String responsibility) {
 //        Calls the constructor of the base class Employee to initialize inherited attributes
         super(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption);
         this.responsibility = responsibility; // Initializes the responsability attribute with the provided value

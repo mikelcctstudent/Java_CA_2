@@ -38,7 +38,7 @@ public class HospitalFileManager {
             String address = null;
             BigDecimal salary = null;
             DepartmentType.DepartmentOption departmentOption = null;
-            ManagerType.ManagerOption managerOption = null;
+            RoleType.ManagerOption managerOption = null;
             PositionType.PositionOption positionOption = null;
             String type = null;
             String specialty = null;
@@ -114,7 +114,7 @@ public class HospitalFileManager {
                     }
                 } else if (line.startsWith("Manager: ")) { // Check if the line starts with "Manager: ".
                     try {
-                        managerOption = ManagerType.ManagerOption.valueOf(line.substring(9).trim().toUpperCase()); // Try to parse the manager type.
+                        managerOption = RoleType.ManagerOption.valueOf(line.substring(9).trim().toUpperCase()); // Try to parse the manager type.
                     } catch (IllegalArgumentException e) {
                         System.out.println("Invalid manager type for line: " + line); // Error message for invalid manager type.
                     }
@@ -288,4 +288,6 @@ public class HospitalFileManager {
         }
         return lines; // Return the list of lines from the file.
     }
+    
+    
 }

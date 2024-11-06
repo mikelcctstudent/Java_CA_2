@@ -15,7 +15,7 @@ public class GeneralStaff extends Employee {//This class will extends employee c
 
     private final String jobDescription; //This is a private attribute called jobDescriptiion of type Stringto store the job description 
 //  This constructor of the class that will receive some parameters
-    public GeneralStaff(String name, LocalDate dateOfBirth, String address, BigDecimal salary, DepartmentType.DepartmentOption departmentOption, ManagerType.ManagerOption managerOption, PositionType.PositionOption positionOption, String jobDescription) {
+    public GeneralStaff(String name, LocalDate dateOfBirth, String address, BigDecimal salary, DepartmentType.DepartmentOption departmentOption, RoleType.ManagerOption managerOption, PositionType.PositionOption positionOption, String jobDescription) {
 //      This callsthe constructor of the employee superclass to initialize inherited fields
         super(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption);
         this.jobDescription = jobDescription; // This initializes the jobDescription attribute with the provided value

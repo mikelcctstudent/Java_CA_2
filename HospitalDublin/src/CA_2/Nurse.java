@@ -17,7 +17,7 @@ public class Nurse extends Employee {// this class which extends employee class
     private final String specialization; // this private attribute will contains the specialization of type string to store the nurse specialization
 
 //  This is the constructor of the  class
-    public Nurse(String name, LocalDate dateOfBirth, String address, BigDecimal salary, DepartmentType.DepartmentOption departmentOption, ManagerType.ManagerOption managerOption, PositionType.PositionOption positionOption, String shift, String specialization) {
+    public Nurse(String name, LocalDate dateOfBirth, String address, BigDecimal salary, DepartmentType.DepartmentOption departmentOption, RoleType.ManagerOption managerOption, PositionType.PositionOption positionOption, String shift, String specialization) {
 //       Now this super callsthe constructor of the superclass employee to initialize inherited attributes
         super(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption);
         this.shift = shift; //now initializes the shift attribute with the value provided

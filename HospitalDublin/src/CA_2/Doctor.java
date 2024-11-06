@@ -17,7 +17,7 @@ public class Doctor extends Employee {// This class will extends Employee, it me
     private String licenseNumber; //This variable will store the license of the doctor 
 
 //  This constructor for manually entering salary 
-    public Doctor(String name, LocalDate dateOfBirth, String address, BigDecimal salary, DepartmentType.DepartmentOption departmentOption, ManagerType.ManagerOption managerOption, PositionType.PositionOption positionOption, String medicalSpecialty, String licenseNumber) {
+    public Doctor(String name, LocalDate dateOfBirth, String address, BigDecimal salary, DepartmentType.DepartmentOption departmentOption, RoleType.ManagerOption managerOption, PositionType.PositionOption positionOption, String medicalSpecialty, String licenseNumber) {
 //      This calls the constructor of the employee superclass to initialize inherited fields
         super(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption);
         this.medicalSpecialty = medicalSpecialty; //This initializes the medicalSpeciality attributes with the provided value
@@ -25,7 +25,7 @@ public class Doctor extends Employee {// This class will extends Employee, it me
     }
 //  This constructor for calculated salary
 
-    public Doctor(String name, LocalDate dateOfBirth, String address, Salary calculatedSalary, DepartmentType.DepartmentOption departmentOption, ManagerType.ManagerOption managerOption, PositionType.PositionOption positionOption, String medicalSpecialty, String licenseNumber) {
+    public Doctor(String name, LocalDate dateOfBirth, String address, Salary calculatedSalary, DepartmentType.DepartmentOption departmentOption, RoleType.ManagerOption managerOption, PositionType.PositionOption positionOption, String medicalSpecialty, String licenseNumber) {
 //      This calls the constructor of the Employee superclass to initialize inherited fields
         super(name, dateOfBirth, address, calculatedSalary, departmentOption, managerOption, positionOption);
         this.medicalSpecialty = medicalSpecialty;//Initializes the medicalSpecialty attribute with the provided value

@@ -92,9 +92,9 @@ public class HospitalMenuHandler {
     }
 
 // Method to get the manager type options from the user
-    public static ManagerType.ManagerOption getManagerTypeOption(Scanner scanner) {
+    public static RoleType.ManagerOption getManagerTypeOption(Scanner scanner) {
 // Calls the generic getOption method with the manager type options
-        return getOption(scanner, ManagerType.ManagerOption.values(), "Manager Department Options");
+        return getOption(scanner, RoleType.ManagerOption.values(), "Manager Department Options");
     }
 
 // Method to get the position type options from the user
