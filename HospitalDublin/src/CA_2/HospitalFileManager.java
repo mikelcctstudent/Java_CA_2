@@ -414,7 +414,7 @@ public class HospitalFileManager {
             writer.write("Consultation Fee: " + patient.getConsultationFee() + "\n");
             writer.write("Appointment Date: " + patient.getAppointmentDate() + "\n");
             writer.write("Appointment Time: " + patient.getAppointmentTime() + "\n");
-            writer.write("Payment Status: " + patient.getPaymentStatus() + "\n");
+            writer.write("Medical Insurance Status: " + patient.getPaymentStatus() + "\n");
             writer.write("\n"); // Add a blank line between patient entries.
         }
     }
@@ -432,7 +432,7 @@ public class HospitalFileManager {
             writer.write("Consultation Fee: " + patient.getConsultationFee() + "\n");
             writer.write("Appointment Date: " + patient.getAppointmentDate() + "\n");
             writer.write("Appointment Time: " + patient.getAppointmentTime() + "\n");
-            writer.write("Payment Status: " + patient.getPaymentStatus() + "\n");
+            writer.write("Medical Insurance Status: " + patient.getPaymentStatus() + "\n");
             writer.write("\n"); // Add a blank line between appointment entries.
         }
     }
