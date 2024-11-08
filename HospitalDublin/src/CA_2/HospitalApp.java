@@ -19,7 +19,10 @@ import java.util.Scanner;//This imports scanner to read user input from the cons
 public class HospitalApp { //This is the name of the main class 
 
     private static final String EMPLOYEE_FILE = "employees.txt";//This file will store employee data.
-    private static final String PATIENT_FILE = "patients.txt"; //File to store employeedata
+    private static final String PATIENT_FILE = "patients.txt"; //This file will store patients data.
+    private static final String SORTED_EMPLOYEES_FILE = "sorted_employees.txt"; //This file will store sorted employees
+    private static final String SORTED_PATIENTS_FILE = "sorted_patients.txt"; // and this one will store the sorted patients
+    private static final String APPOINTMENT_FILE = "patients_appointments.txt";//File to store employeedata
 
     public static void main(String[] args) { // The main method the entry point for the application
         Scanner scanner = new Scanner(System.in);//Now I created a scanner object to read user input from the console
@@ -33,7 +36,7 @@ public class HospitalApp { //This is the name of the main class
 //      Now I created a try catch to check if the file name it was read successfuly in the system
         try {
 //          Reads the applicant data from the file into the project folder called "applicants_form.txt"
-            applicants = HospitalFileManager.readApplicantsForm(applicantsFormFromFile);
+            applicants = HospitalFileManage.readApplicantsForm(applicantsFormFromFile);
             System.out.println("File read successfully");//Informs the user that the file was read without issues
         } catch (IOException e) {// Handles any IOException that occur if the file if not found or cant be read.
             System.out.println("Error reading file: " + e.getMessage());//Prints an error message if somenthing goes wrong during try read the file name
@@ -49,10 +52,15 @@ public class HospitalApp { //This is the name of the main class
             HospitalMenu.MenuOption mainOption = HospitalMenuHandler.getMainOptions(scanner);
             switch (mainOption) {//Perfoms actions based on the users menu selection
                 case MANAGE_EMPLOYEES://If user selects to manage employees
-//                   Placeholder for future code to manage employees
+//                 Thsi I will call the manager employees options
+                   EmployeeManage.manageEmployees(scanner, employees, applicants, applicantsFormFromFile);
                     break;
                 case MANAGE_PATIENTS://If user selects to manage patients.
-//                   Plceholder for future code to manage patients
+                    try {
+                        PatientManage.managePatients(scanner, patients);
+                    } catch (IOException e) {
+                        System.out.println("An error occurred while managing patients: " + e.getMessage());
+                    }
                     break;
                 case EXIT://If user selects to exit the application
                     exit = confirmExit(scanner);// Calls a method to confirm the users intention to exit
@@ -65,6 +73,7 @@ public class HospitalApp { //This is the name of the main class
         scanner.close();//This close the scanner object
     }
 //  This method its to request and validate the file name from the user
+
     public static String askForFileName(Scanner scanner) {
         String filename;// Variable to hold the file name input by the user.
         while (true) { // Infite loop until a valid file name is provided
@@ -82,6 +91,7 @@ public class HospitalApp { //This is the name of the main class
 
     }
 //  Method to confirm the user's intention to exit the application
+
     private static boolean confirmExit(Scanner scanner) {
         System.out.print("Are you sure you want to exit? (yes/no): ");// Prompts the user for confirmation to exit
         String response = getValidResponse(scanner);//Now will calls another method to get a valid yes or no response from the user
@@ -94,6 +104,7 @@ public class HospitalApp { //This is the name of the main class
         }
     }
 //  Mthod to snsure valid yes or no response from the user
+
     public static String getValidResponse(Scanner scanner) {
         String response;// variable to hold the user response
         while (true) { //Loop until a valid response is received
@@ -105,6 +116,14 @@ public class HospitalApp { //This is the name of the main class
             }
         }
         return response; // returns the valid response
+    }
+//  This method its for clean all data from the file when is executed the program
+    public static void clearAllDataFiles() {
+        HospitalFileManage.clearAllFiles(EMPLOYEE_FILE);
+        HospitalFileManage.clearAllFiles(SORTED_EMPLOYEES_FILE);
+        HospitalFileManage.clearAllFiles(PATIENT_FILE);
+        HospitalFileManage.clearAllFiles(SORTED_PATIENTS_FILE);
+        HospitalFileManage.clearAllFiles(APPOINTMENT_FILE);
     }
 
 }

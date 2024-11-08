@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package CA_2;// This is the package to which the class HospitalFileManager belongs
+package CA_2;// This is the package to which the class HospitalFileManage belongs
 
 import java.io.BufferedReader; // This imports for efficient reading of text from an input stream.
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader; // This imports for reading data from files.
 import java.io.FileWriter;
 import java.io.IOException; // This imports to handle input and output exceptions.
@@ -22,16 +23,25 @@ import java.util.List; // This imports the List interface to manage collections 
  *
  * @author Mikel
  */
-public class HospitalFileManager {
+public class HospitalFileManage {
 //  This file was created into the project folder to exported sorted exployees
+
     private static final String SORTED_EMPLOYEES_FILE = "sorted_employees.txt";
     //  This file was created into the project folder to exported sorted patients
     private static final String SORTED_PATIENTS_FILE = "sorted_patients.txt";
 
 //  This class Reads the employee file and returns a list of Employee
-    public static List<Employee> readEmployeesFile(String fileName) throws IOException {
+    public static List<Employee> readEmployeesFile(String employeeFileName) throws IOException {
         List<Employee> employees = new ArrayList<>(); // Create a list to store employees.
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) { // Open the file for reading.
+
+        // Check if the file exists and create it if it doesn’t
+        File file = new File(employeeFileName);
+        if (!file.exists()) {
+            System.out.println("File '" + employeeFileName + "' not found. \nCreating a new file....");
+            file.createNewFile(); // Create a new empty file if it doesn’t exist
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(employeeFileName))) { // Open the file for reading.
             String line; // variable to store each line read from the file.
 
             // These variables to temporarily store employee data before creating an Employee object.
@@ -42,37 +52,25 @@ public class HospitalFileManager {
             DepartmentType.DepartmentOption departmentOption = null;
             RoleType.ManagerOption managerOption = null;
             PositionType.PositionOption positionOption = null;
-            String type = null;
-            String specialty = null;
-            String licenseNumber = null;
-            String shift = null;
-            String specialization = null;
-            String role = null;
-            String jobDescription = null;
+            EmployeeType.EmployeeOption employeeType = null;
 
             // Read each line of the file until the end.
+            // Loop through each line of the file
             while ((line = br.readLine()) != null) {
-                if (line.trim().isEmpty()) { // Check if the line is empty (indicates the end of an employee record).
-                    // If all mandatory fields are filled, create and add the corresponding Employee object.
-                    if (name != null && dateOfBirth != null && address != null && salary != null && departmentOption != null && managerOption != null && positionOption != null) {
-                        switch (type) { // Check the type of employee to create the specific object.
-                            case "Doctor":
-                                employees.add(new Doctor(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption, specialty, licenseNumber));
-                                break;
-                            case "Nurse":
-                                employees.add(new Nurse(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption, shift, specialization));
-                                break;
-                            case "AdministrativeAssistant":
-                                employees.add(new AdministrativeAssistant(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption, role));
-                                break;
-                            case "GeneralStaff":
-                                employees.add(new GeneralStaff(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption, jobDescription));
-                                break;
-                            default: // If there is no specific type, create a generic Employee object.
-                                employees.add(new Employee(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption));
-                        }
+                // Check for a blank line, indicating the end of an employee's data
+                if (line.trim().isEmpty()) {
+                    // If all mandatory fields are set, create a new Employee object
+                    if (name != null && dateOfBirth != null && address != null && salary != null
+                            && departmentOption != null && managerOption != null && positionOption != null && employeeType != null) {
+
+                        // Create a basic Employee object with common attributes
+                        Employee employee = new Employee(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption, employeeType);
+
+                        // Add the created Employee object to the employees list
+                        employees.add(employee);
                     }
-                    // Reset the variables for the next employee record.
+
+                    // Reset all variables for the next employee entry in the file
                     name = null;
                     dateOfBirth = null;
                     address = null;
@@ -80,14 +78,8 @@ public class HospitalFileManager {
                     departmentOption = null;
                     managerOption = null;
                     positionOption = null;
-                    type = null;
-                    specialty = null;
-                    licenseNumber = null;
-                    shift = null;
-                    specialization = null;
-                    role = null;
-                    jobDescription = null;
-                    continue; // Continue to the next iteration of the loop.
+                    employeeType = null;
+                    continue; // Move to the next line
                 }
 
                 // Check the prefix of the line to store the corresponding field value.
@@ -99,81 +91,69 @@ public class HospitalFileManager {
                     } catch (DateTimeParseException e) {
                         System.out.println("Invalid date format for line: " + line); // Error message for invalid date format.
                     }
-                } else if (line.startsWith("Address: ")) { // Check if the line starts with "Address: ".
-                    address = line.substring(9).trim(); // Extract and store the address.
-                } else if (line.startsWith("Salary: ")) { // Check if the line starts with "Salary: ".
+                } else if (line.startsWith("Address: ")) {
+                    address = line.substring(9).trim(); // Extract and trim address
+                } else if (line.startsWith("Salary: ")) {
                     try {
-                        String salaryStr = line.substring(8).trim().replace(" EUR", ""); // Remove currency, if present.
-                        salary = new BigDecimal(salaryStr); // Convert and store the salary.
+                        String salaryStr = line.substring(8).trim().replace(" EUR", ""); // Remove currency symbol
+                        salary = new BigDecimal(salaryStr); // Parse salary as BigDecimal
                     } catch (NumberFormatException e) {
-                        System.out.println("Invalid salary format for line: " + line); // Error message for invalid salary format.
+                        System.out.println("Invalid salary format for line: " + line);
                     }
-                } else if (line.startsWith("Department: ")) { // Check if the line starts with "Department: ".
+                } else if (line.startsWith("Department: ")) {
                     try {
-                        departmentOption = DepartmentType.DepartmentOption.valueOf(line.substring(11).trim().toUpperCase()); // Try to parse the department type.
+                        departmentOption = DepartmentType.DepartmentOption.valueOf(line.substring(12).trim().toUpperCase());
                     } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid department type for line: " + line); // Error message for invalid department type.
+                        System.out.println("Invalid department type for line: " + line);
                     }
-                } else if (line.startsWith("Manager: ")) { // Check if the line starts with "Manager: ".
+                } else if (line.startsWith("Role: ")) {
                     try {
-                        managerOption = RoleType.ManagerOption.valueOf(line.substring(9).trim().toUpperCase()); // Try to parse the manager type.
+                        managerOption = RoleType.ManagerOption.valueOf(line.substring(6).trim().toUpperCase());
                     } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid manager type for line: " + line); // Error message for invalid manager type.
+                        System.out.println("Invalid role type for line: " + line);
                     }
-                } else if (line.startsWith("Position: ")) { // Check if the line starts with "Position: ".
+                } else if (line.startsWith("Position: ")) {
                     try {
-                        positionOption = PositionType.PositionOption.valueOf(line.substring(10).trim().toUpperCase()); // Try to parse the position type.
+                        positionOption = PositionType.PositionOption.valueOf(line.substring(10).trim().toUpperCase());
                     } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid position type for line: " + line); // Error message for invalid position type.
+                        System.out.println("Invalid position type for line: " + line);
                     }
-                } else if (line.startsWith("Type: ")) { // Check if the line starts with "Type: ".
-                    type = line.substring(6).trim(); // Extract and store the employee type.
-                } else if (line.startsWith("Specialty: ")) { // Check if the line starts with "Specialty: ".
-                    specialty = line.substring(11).trim(); // Extract and store the specialty.
-                } else if (line.startsWith("License: ")) { // Check if the line starts with "License: ".
-                    licenseNumber = line.substring(9).trim(); // Extract and store the license number.
-                } else if (line.startsWith("Shift: ")) { // Check if the line starts with "Shift: ".
-                    shift = line.substring(7).trim(); // Extract and store the shift.
-                } else if (line.startsWith("Specialization: ")) { // Check if the line starts with "Specialization: ".
-                    specialization = line.substring(16).trim(); // Extract and store the specialization.
-                } else if (line.startsWith("Role: ")) { // Check if the line starts with "Role: ".
-                    role = line.substring(6).trim(); // Extract and store the role.
-                } else if (line.startsWith("Job Description: ")) { // Check if the line starts with "Job Description: ".
-                    jobDescription = line.substring(17).trim(); // Extract and store the job description.
+                } else if (line.startsWith("Employee Type: ")) {
+                    // Parse and set employee type
+                    employeeType = EmployeeType.EmployeeOption.valueOf(line.substring(15).trim().toUpperCase());
                 }
             }
 
-            // Add the last employee read from the file if all mandatory fields are present.
-            if (name != null && dateOfBirth != null && address != null && salary != null && departmentOption != null && managerOption != null && positionOption != null) {
-                switch (type) { // Check the type of employee to create the specific object.
-                    case "Doctor":
-                        employees.add(new Doctor(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption, specialty, licenseNumber));
-                        break;
-                    case "Nurse":
-                        employees.add(new Nurse(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption, shift, specialization));
-                        break;
-                    case "AdministrativeAssistant":
-                        employees.add(new AdministrativeAssistant(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption, role));
-                        break;
-                    case "GeneralStaff":
-                        employees.add(new GeneralStaff(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption, jobDescription));
-                        break;
-                    default: // If there is no specific type, create a generic Employee object.
-                        employees.add(new Employee(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption));
-                }
+            // Handle the last entry if the file does not end with a blank line
+            if (name != null && dateOfBirth != null && address != null && salary != null
+                    && departmentOption != null && managerOption != null && positionOption != null && employeeType != null) {
+
+                // Create and add the last Employee object based on common attributes
+                Employee employee = new Employee(name, dateOfBirth, address, salary, departmentOption, managerOption, positionOption, employeeType);
+                employees.add(employee); // Add last employee entry to list
             }
 
         } catch (IOException e) {
-            System.out.println("Error reading employee file: " + e.getMessage()); // Print an error message if file reading fails.
-            throw e; // Throw the exception to be handled by the caller of the method.
+            // Print error message and rethrow exception to be handled by calling method
+            System.out.println("Error reading employee file: " + e.getMessage());
+            throw e;
         }
-        return employees; // Return the list of employees.
+
+        return employees; // Return the list of Employee objects
     }
 
 //This file reads the patient file and returns a list of Patient objects.
-    public static List<Patient> readPatientsFile(String filePath) throws IOException {
+    public static List<Patient> readPatientsFile(String patientFileName) throws IOException {
         List<Patient> patients = new ArrayList<>(); // Create a list to store patients.
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) { // Open the file for reading.
+
+        // Check if the file exists and create it if it doesn’t
+        File file = new File(patientFileName);
+        if (!file.exists()) {
+            System.out.println("File '" + patientFileName + "' not found. \nCreating a new file....");
+            file.createNewFile(); // Create a new empty file if it doesn’t exist
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(patientFileName))) { // Open the file for reading.
             String line; // Variable to store each line read from the file.
 
             // Variables to temporarily store patient data before creating a Patient object.
@@ -231,26 +211,36 @@ public class HospitalFileManager {
                 } else if (line.startsWith("Doctor: ")) { // Check if the line starts with "Doctor: ".
                     doctorName = line.substring(8).trim(); // Extract and store the doctor's name.
                 } else if (line.startsWith("Consultation Fee: ")) { // Check if the line starts with "Consultation Fee: ".
-                    try {
-                        consultationFee = new BigDecimal(line.substring(18).trim()); // Try to parse the consultation fee.
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid consultation fee format for line: " + line); // Error message for invalid consultation fee format.
+                    String feeStr = line.substring(18).trim(); // Extract and trim the consultation fee
+                    if (!feeStr.isEmpty() && !feeStr.equalsIgnoreCase("null")) { // Check if the string is not empty or "null" before attempting to parse
+                        try {
+                            consultationFee = new BigDecimal(feeStr); // Try to parse the consultation fee
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid consultation fee format for line: " + line); // Error message for invalid consultation fee format
+                        }
                     }
                 } else if (line.startsWith("Appointment Date: ")) { // Check if the line starts with "Appointment Date: ".
-                    try {
-                        appointmentDate = LocalDate.parse(line.substring(17).trim()); // Try to parse the appointment date.
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Invalid appointment date format for line: " + line); // Error message for invalid appointment date format.
+                    String dateStr = line.substring(17).trim(); // Extract and trim the appointment date
+                    if (!dateStr.isEmpty() && !dateStr.equalsIgnoreCase("null")) { // Check if the string is not empty or "null" before attempting to parse
+                        try {
+                            appointmentDate = LocalDate.parse(dateStr); // Try to parse the appointment date
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Invalid appointment date format for line: " + line); // Error message for invalid appointment date format
+                        }
                     }
                 } else if (line.startsWith("Appointment Time: ")) { // Check if the line starts with "Appointment Time: ".
-                    try {
-                        appointmentTime = LocalTime.parse(line.substring(17).trim()); // Try to parse the appointment time.
-                    } catch (DateTimeParseException e) {
-                        System.out.println("Invalid appointment time format for line: " + line); // Error message for invalid appointment time format.
+                    String timeStr = line.substring(17).trim(); // Extract and trim the appointment time
+                    if (!timeStr.isEmpty() && !timeStr.equalsIgnoreCase("null")) { // Check if the string is not empty or "null" before attempting to parse
+                        try {
+                            appointmentTime = LocalTime.parse(timeStr); // Try to parse the appointment time
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Invalid appointment time format for line: " + line); // Error message for invalid appointment time format
+                        }
                     }
                 } else if (line.startsWith("Payment Status: ")) { // Check if the line starts with "Payment Status: ".
-                    healthInsuranceStatus = line.substring(15).trim(); // Extract and store the health insurance status.
+                    healthInsuranceStatus = line.substring(15).trim(); // Extract and store the health insurance status
                 }
+
             }
 
             // Add the last patient read from the file if all mandatory fields are present.
@@ -356,48 +346,28 @@ public class HospitalFileManager {
             System.out.println("Error exporting sorted appointment list: " + e.getMessage());
         }
     }
-    
+
 //  In this method created will write the employee information to a file created into the project folder
     public static void writeEmployeeToFile(Employee employee, String filePath) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // Open the file for writing, appending new data.
-            // Write general employee information to the file.
-            writer.write("Name: " + employee.getName() + "\n");
-            writer.write("Date of Birth: " + employee.getDateOfBirth() + "\n");
-            writer.write("Address: " + employee.getAddress() + "\n");
-            writer.write("Salary: " + employee.getSalary() + " EUR\n");
-            writer.write("DepartmentOption: " + employee.getDepartmentType().name() + "\n");
-            writer.write("Role: " + employee.getManagerType().name() + "\n");
-            writer.write("Position: " + employee.getPositionType().name() + "\n");
+        // Use BufferedWriter to write employee data to a file, appending to existing content
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            // Write general employee details common to all employees
+            writer.write("Name: " + employee.getName() + "\n"); // Employee name
+            writer.write("Date of Birth: " + employee.getDateOfBirth() + "\n"); // Date of birth
+            writer.write("Address: " + employee.getAddress() + "\n"); // Employee address
+            writer.write("Salary: " + employee.getSalary() + "\n"); // Salary with EUR currency symbol
+            writer.write("Department: " + employee.getDepartmentType().name() + "\n"); // Department type
+            writer.write("Role: " + employee.getManagerType().name() + "\n"); // Role within the department
+            writer.write("Position: " + employee.getPositionType().name() + "\n"); // Job position
+            writer.write("Type: " + employee.getEmployeeOption().name() + "\n"); // Write employee type
 
-            String type = employee.getType(); // Retrieve the specific type of employee.
-            writer.write("Type: " + type + "\n");
-
-            // Write additional information specific to each type of employee.
-            switch (type) {
-                case "Doctor":
-                    Doctor doctor = (Doctor) employee; // Cast the employee to Doctor type.
-                    writer.write("Specialty: " + doctor.getMedicalSpecialty() + "\n");
-                    writer.write("License: " + doctor.getLicenseNumber() + "\n");
-                    break;
-                case "Nurse":
-                    Nurse nurse = (Nurse) employee; // Cast the employee to Nurse type.
-                    writer.write("Shift: " + nurse.getShift() + "\n");
-                    writer.write("Specialization: " + nurse.getSpecialization() + "\n");
-                    break;
-                case "AdministrativeAssistant":
-                    AdministrativeAssistant admin = (AdministrativeAssistant) employee; // Cast the employee to AdministrativeAssistant type.
-                    writer.write("Role: " + admin.getResponsibility() + "\n");
-                    break;
-                case "GeneralStaff":
-                    GeneralStaff generalStaff = (GeneralStaff) employee; // Cast the employee to GeneralStaff type.
-                    writer.write("Job Description: " + generalStaff.getJobDescription() + "\n");
-                    break;
-                default:
-                    // If none of the specific types match, fall back to generic Employee type.
-                    break;
+            // Check if the employee is a nurse and add shift details if available
+            if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.NURSE) {
+                writer.write("Shift: " + (employee.getShift() != null ? employee.getShift() : "N/A") + "\n");
             }
 
-            writer.write("\n"); // Add a blank line between employee entries.
+            // Add a blank line after each employee entry to separate them in the file
+            writer.write("\n");
         }
     }
 

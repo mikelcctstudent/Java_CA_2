@@ -87,9 +87,14 @@ public class Patient extends Person { //This class called Patient thta will exte
     }
 //  This public method to set the payment status
 
-    public void setPaymentStatus(String paymentStatus) {
+    public void setMedicalInsuranceStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
+//  This public method to set the consultation fee 
+       public void setConsultationFee(BigDecimal consultationFee) {
+        this.consultationFee = consultationFee;
+    }
+
 //  This implements the getType() method from the Person class to return "Patient"    
 
     @Override
