@@ -21,7 +21,7 @@ import java.util.Scanner;
 public class PatientManage {// Defines the PatientManage class, which handles the management of patient information, including adding, sorting, and scheduling consultations.
 
     // Constants for patient file names
-    private static final String PATIENT_FILE = "patients.txt"; // Filename for storing patient details
+//    private static final String PATIENT_FILE = "patients.txt"; // Filename for storing patient details
     private static final String PATIENT_APPOINTMENTS_FILE = "patients_appointments.txt"; // Filename for storing appointment details
 
     // Method to manage patient-related operations through a sub-menu
@@ -51,7 +51,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
                     break;
                 case SHOW_APPOINTMENT_LIST:
                     // Displays a list of scheduled appointments
-                    handleShowPatientList(scanner);
+                    handleShowPatientList(scanner, patients);
                     break;
                 case BACK:
                     // Exits the submenu and returns to the main menu
@@ -131,10 +131,6 @@ public class PatientManage {// Defines the PatientManage class, which handles th
             try {
                 HospitalFileManage.writePatientToFile(newPatient, "patients.txt");
                 System.out.println("Patient details saved to patient file.");
-
-                // Reloads patient list in memory to update changes
-                patients.clear();
-                patients.addAll(HospitalFileManage.readPatientsFile("patients.txt"));
             } catch (IOException e) {
                 System.out.println("Error saving patient details to file: " + e.getMessage());
             }
@@ -395,35 +391,26 @@ public class PatientManage {// Defines the PatientManage class, which handles th
     }
 
     // Method to handle showing different patient lists, like sorted patient lists or appointment lists
-    public static void handleShowPatientList(Scanner scanner) {
+    public static void handleShowPatientList(Scanner scanner, List<Patient> patients) {
         HospitalMenu.ShowListOptionPatient showListOptionPatient = HospitalMenuHandler.getShowListOptionsPatients(scanner);
         switch (showListOptionPatient) {
             case SHOW_SORTED_PATIENTS:
-                try {
-                    List<Patient> patients = HospitalFileManage.readPatientsFile(PATIENT_FILE);
-                    if (patients.isEmpty()) {
-                        System.out.println("\nThe patient list is empty.");
-                    } else {
-                        patients = SortingAlgorithm.mergeSortPatients(patients); // Sort patients
-                        System.out.println("\nSorted Patient list: ");
-                        displaySortedPatients(patients, 20, scanner);
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error reading patient file: " + e.getMessage());
+
+                if (patients.isEmpty()) {
+                    System.out.println("\nThe patient list is empty.");
+                } else {
+                    patients = SortingAlgorithm.mergeSortPatients(patients); // Sort patients
+                    System.out.println("\nSorted Patient list: ");
+                    displaySortedPatients(patients, 20, scanner);
                 }
                 break;
             case SHOW_SORTED_SCHEDULES:
-                try {
-                    List<Patient> patients = HospitalFileManage.readPatientsFile(PATIENT_APPOINTMENTS_FILE);
-                    if (patients.isEmpty()) {
-                        System.out.println("\nThe patient list is empty.");
-                    } else {
-                        patients = SortingAlgorithm.mergeSortPatients(patients);
-                        System.out.println("\nSorted Patient list: ");
-                        displaySortedAppointment(patients, 20, scanner);
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error reading patient file: " + e.getMessage());
+                if (patients.isEmpty()) {
+                    System.out.println("\nThe patient list is empty.");
+                } else {
+                    patients = SortingAlgorithm.mergeSortPatients(patients);
+                    System.out.println("\nSorted Patient list: ");
+                    displaySortedAppointment(patients, 20, scanner);
                 }
                 break;
             default:
@@ -447,7 +434,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         if (patient.getAppointmentDate() != null) { // Display appointment details if scheduled
             System.out.println("Appointment Date: " + patient.getAppointmentDate());
             System.out.println("Appointment Time: " + patient.getAppointmentTime());
-            System.out.println("Payment Status: " + patient.getPaymentStatus());
+            System.out.println("Payment Status: " + patient.getMedicalInsurancetatus());
         }
     }
 
@@ -470,7 +457,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
             if (patient.getAppointmentDate() != null) {
                 System.out.println("Appointment Date: " + patient.getAppointmentDate());
                 System.out.println("Appointment Time: " + patient.getAppointmentTime());
-                System.out.println("Payment Status: " + patient.getPaymentStatus());
+                System.out.println("Payment Status: " + patient.getMedicalInsurancetatus());
             }
 
             System.out.println(); // Empty line for readability between patients
@@ -500,7 +487,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
             if (patient.getAppointmentDate() != null) {
                 System.out.println("Appointment Date: " + patient.getAppointmentDate());
                 System.out.println("Appointment Time: " + patient.getAppointmentTime());
-                System.out.println("Payment Status: " + patient.getPaymentStatus());
+                System.out.println("Payment Status: " + patient.getMedicalInsurancetatus());
             }
 
             System.out.println(); // Empty line for readability between appointments

@@ -20,7 +20,7 @@ public class Patient extends Person { //This class called Patient thta will exte
     private BigDecimal consultationFee;//this private variable to store the date of the appoitment
     private LocalDate appointmentDate;//This private instance variable to store the date of the patient appointment
     private LocalTime appointmentTime;//To store the time of the patient appointment
-    private String paymentStatus;//variable to store the payment status(paid/unpaid)
+    private String medicalInsurancetatus;//variable to store the payment status(paid/unpaid)
 
 //   This Constructor 
     public Patient(String name, LocalDate dateOfBirth, String address, String medicalIssue, DepartmentType.DepartmentOption medicalDepartmentOption, String doctorName, BigDecimal consultationFee, LocalDate appointmentDate, LocalTime appointmentTime, String paymentStatus) {
@@ -38,7 +38,7 @@ public class Patient extends Person { //This class called Patient thta will exte
 //      Initialize the appointment time
         this.appointmentTime = appointmentTime;
 //      Initializes the payment status
-        this.paymentStatus = paymentStatus;
+        this.medicalInsurancetatus = paymentStatus;
     }
 //  this method to get the medical issue
 
@@ -72,8 +72,8 @@ public class Patient extends Person { //This class called Patient thta will exte
     }
 //  This method to get the payment status
 
-    public String getPaymentStatus() {
-        return paymentStatus;
+    public String getMedicalInsurancetatus() {
+        return medicalInsurancetatus;
     }
 //   This method to set the consultation fee
 
@@ -88,7 +88,7 @@ public class Patient extends Person { //This class called Patient thta will exte
 //  This public method to set the payment status
 
     public void setMedicalInsuranceStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
+        this.medicalInsurancetatus = paymentStatus;
     }
 //  This public method to set the consultation fee 
        public void setConsultationFee(BigDecimal consultationFee) {
@@ -113,9 +113,9 @@ public class Patient extends Person { //This class called Patient thta will exte
                 + "\nMedical Department: " + medicalDepartmentOption
                 + "\nDoctor: " + (doctorName != null && !doctorName.isEmpty() ? doctorName
                 : "N/A")
-                + "\nConsultation Fee: " + consultationFee
+                + "\nConsultation Fee: " + (consultationFee != null ? consultationFee : "N/A")
                 + "\nAppointment Date: " + (appointmentDate != null ? appointmentDate : "N/A")
                 + "\nAppointment Time: " + (appointmentTime != null ? appointmentTime : "N/A")
-                + "\nPayment Status: " + paymentStatus + "\n";
+                + "\nPayment Status: " + medicalInsurancetatus + "\n";
     }
 }

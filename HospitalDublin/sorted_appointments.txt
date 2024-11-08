@@ -1,9 +1,9 @@
-Name: mamma
+Name: mmm
 Date of Birth: 2022-12-12
-Address: sss
-Medical Issue: kjdkjd
-Medical Department: ONCOLOGY
-Doctor: shshhs
+Address: l
+Medical Issue: gg
+Medical Department: EMERGENCY
+Doctor: mm
 Consultation Fee: null
 Appointment Date: null
 Appointment Time: null
