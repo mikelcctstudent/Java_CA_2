@@ -17,7 +17,7 @@ public class Employee extends Person { //This class employee will extends the ab
     private Salary calculatedSalary; //This the salary calculated using hourly rates the type will salary object
 //  This will declare private instance variables for department, manager, and position options, likely enums for predefinedoptions
     private DepartmentType.DepartmentOption departmentOption;
-    private RoleType.ManagerOption managerOption;
+    private RoleType.RoleOption managerOption;
     private PositionType.PositionOption positionOption;
     private EmployeeType.EmployeeOption employeeOption; // Type of rule of the employee
     
@@ -26,7 +26,7 @@ public class Employee extends Person { //This class employee will extends the ab
     
 //  Now I created two type os constructor one for manually entered salary for the user and another one for calculated salary
 //  using the Salary object
-    public Employee(String name, LocalDate dateOfBirth, String address, BigDecimal salary, DepartmentType.DepartmentOption departmentOption, RoleType.ManagerOption managerOption, PositionType.PositionOption positionOption, EmployeeType.EmployeeOption employeeOption) {
+    public Employee(String name, LocalDate dateOfBirth, String address, BigDecimal salary, DepartmentType.DepartmentOption departmentOption, RoleType.RoleOption managerOption, PositionType.PositionOption positionOption, EmployeeType.EmployeeOption employeeOption) {
         super(name, dateOfBirth, address); // This part will calls the parent Person class constructor to initialize name, date of birth, and address
         this.salary = salary; // Initializes the salary with the manually entered value.
         this.departmentOption = departmentOption; //Initializes the department options with the values that was provided
@@ -35,7 +35,7 @@ public class Employee extends Person { //This class employee will extends the ab
         this.employeeOption = employeeOption;
     }
 //This one I will use just for calculated salary
-    public Employee(String name, LocalDate dateOfBirth, String address, Salary calculatedSalary, DepartmentType.DepartmentOption departmentOption, RoleType.ManagerOption managerOption, PositionType.PositionOption positionOption, EmployeeType.EmployeeOption employeeOption) {
+    public Employee(String name, LocalDate dateOfBirth, String address, Salary calculatedSalary, DepartmentType.DepartmentOption departmentOption, RoleType.RoleOption managerOption, PositionType.PositionOption positionOption, EmployeeType.EmployeeOption employeeOption) {
         super(name, dateOfBirth, address); //In this part we calls the parent PErson class constructor to initialize name, date of birth,address
         this.calculatedSalary = calculatedSalary;// Initializes the salary with the manually entered value.
         this.departmentOption = departmentOption;//Initializes the department options with the values that was provided
@@ -58,7 +58,7 @@ public class Employee extends Person { //This class employee will extends the ab
         return departmentOption;
     }
 //  This method to get the manager option
-    public RoleType.ManagerOption getManagerType() {
+    public RoleType.RoleOption getManagerType() {
         return managerOption;
     }
 //  This method is to get the position option

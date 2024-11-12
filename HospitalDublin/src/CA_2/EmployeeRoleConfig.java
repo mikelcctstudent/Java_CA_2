@@ -19,7 +19,8 @@ public class EmployeeRoleConfig {// Class to map coherent combinations between E
             EmployeeType.EmployeeOption.DOCTOR, new DepartmentType.DepartmentOption[]{
                     DepartmentType.DepartmentOption.CARDIOLOGY,
                     DepartmentType.DepartmentOption.NEUROLOGY,
-                    DepartmentType.DepartmentOption.ONCOLOGY
+                    DepartmentType.DepartmentOption.ONCOLOGY,
+                    DepartmentType.DepartmentOption.EMERGENCY
             },
             // For EmployeeType NURSE, associate the departments: PEDIATRICS, EMERGENCY, ORTHOPEDICS
             EmployeeType.EmployeeOption.NURSE, new DepartmentType.DepartmentOption[]{
@@ -33,7 +34,6 @@ public class EmployeeRoleConfig {// Class to map coherent combinations between E
             },
             // For EmployeeType GENERAL_STAFF, associate the departments: EMERGENCY, ADMINISTRATION, SUPPORT_SERVICES
             EmployeeType.EmployeeOption.GENERAL_STAFF, new DepartmentType.DepartmentOption[]{
-                    DepartmentType.DepartmentOption.EMERGENCY,
                     DepartmentType.DepartmentOption.ADMINISTRATION,
                     DepartmentType.DepartmentOption.SUPPORT_SERVIVES
             }
@@ -60,16 +60,16 @@ public class EmployeeRoleConfig {// Class to map coherent combinations between E
             }
     );
 
-    // A public static final Map that links each EmployeeType.EmployeeOption to a specific RoleType.ManagerOption (manager role)
-    public static final Map<EmployeeType.EmployeeOption, RoleType.ManagerOption> MANAGER_OPTIONS = Map.of(
+    // A public static final Map that links each EmployeeType.EmployeeOption to a specific RoleType.RoleOption (manager role)
+    public static final Map<EmployeeType.EmployeeOption, RoleType.RoleOption> MANAGER_OPTIONS = Map.of(
             // For EmployeeType DOCTOR, the manager is MEDICAL_DIRECTOR
-            EmployeeType.EmployeeOption.DOCTOR, RoleType.ManagerOption.MEDICAL_DIRECTOR,
+            EmployeeType.EmployeeOption.DOCTOR, RoleType.RoleOption.MEDICAL_DIRECTOR,
             // For EmployeeType NURSE, the manager is NURSE_MANAGER
-            EmployeeType.EmployeeOption.NURSE, RoleType.ManagerOption.NURSE_MANAGER,
+            EmployeeType.EmployeeOption.NURSE, RoleType.RoleOption.NURSE_MANAGER,
             // For EmployeeType ADMINISTRATIVE_ASSISTANT, the manager is HR_MANAGER
-            EmployeeType.EmployeeOption.ADMINISTRATIVE_ASSISTANT, RoleType.ManagerOption.HR_MANAGER,
+            EmployeeType.EmployeeOption.ADMINISTRATIVE_ASSISTANT, RoleType.RoleOption.HR_MANAGER,
             // For EmployeeType GENERAL_STAFF, the manager is GENERAL_MANAGER
-            EmployeeType.EmployeeOption.GENERAL_STAFF, RoleType.ManagerOption.GENERAL_MANAGER
+            EmployeeType.EmployeeOption.GENERAL_STAFF, RoleType.RoleOption.GENERAL_MANAGER
     );
     
 }

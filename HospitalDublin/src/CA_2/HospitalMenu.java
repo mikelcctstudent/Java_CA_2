@@ -14,7 +14,7 @@ public interface HospitalMenu {
     enum MenuOption {
         MANAGE_EMPLOYEES,//0
         MANAGE_PATIENTS,//1
-        EXIT//2
+        EXIT_OF_THE_SYSTEM//2
     }
 //  These are the menu options we would like to present to the user for the sub menu employees
 
@@ -24,7 +24,7 @@ public interface HospitalMenu {
         ADD_EMPLOYEE,//2
         GENERATE_RANDOM_EMPLOYEE,//3
         SHOW_EMPLOYEE_LIST,//4
-        BACK//5
+        BACK_TO_MAIN_MENU//5
     }
 //  These are the menu options we would like to present to the user for the sub menu patients
 
@@ -34,7 +34,7 @@ public interface HospitalMenu {
         ADD_PATIENTS,//2
         SCHEDULE_CONSULTATION,//3
         SHOW_APPOINTMENT_LIST,//4
-        BACK//5
+        BACK_TO_MAIN_MENU//5
     }
 //      These are the menu options we would like to present to the user for the sort option
 

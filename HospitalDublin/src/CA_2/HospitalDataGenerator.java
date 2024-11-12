@@ -49,7 +49,7 @@ public class HospitalDataGenerator {
             PositionType.PositionOption position = getRandomElement(EmployeeRoleConfig.POSITION_OPTIONS.get(employeeType));
 
             // Get a manager role for the employee type to assign a reporting structure
-            RoleType.ManagerOption manager = EmployeeRoleConfig.MANAGER_OPTIONS.get(employeeType);
+            RoleType.RoleOption manager = EmployeeRoleConfig.MANAGER_OPTIONS.get(employeeType);
 
             // Calculate an hourly rate for the employee based on the chosen department
             BigDecimal hourlyRate = salaryPolicy.getHourlyRate(department);

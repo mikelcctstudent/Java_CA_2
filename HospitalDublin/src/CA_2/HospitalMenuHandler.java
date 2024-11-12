@@ -20,7 +20,11 @@ public class HospitalMenuHandler {
         System.out.println("\n" + menuName + ":");// Displays the menu name
 //      Loop trpugh and display each option in the enum.
         for (int i = 0; i < options.length; i++) {
-            System.out.printf("%d - %s\n", i + 1, options[i].name());//Display each option with a corresponding number.
+            // Format the enum name for friendly display (replaces "_" with space and capitalizes the first letter)
+            String displayNameformatted = options[i].name().replace('_', ' ').toLowerCase(); // Replaces "_" with space and converts to lowercase
+            displayNameformatted = Character.toUpperCase(displayNameformatted.charAt(0)) + displayNameformatted.substring(1); // Capitalizes the first letter
+
+            System.out.printf("%d - %s\n", i + 1, displayNameformatted);//Display each option with a corresponding number.
         }
         System.out.print("Please enter your choice: "); //Prompts the user for their choice
 
@@ -46,7 +50,7 @@ public class HospitalMenuHandler {
 
     public static HospitalMenu.MenuOption getMainOptions(Scanner scanner) {
 //      Calls the generic getOption method with the main menu options
-        return getOption(scanner, HospitalMenu.MenuOption.values(), "Main Options");
+        return getOption(scanner, HospitalMenu.MenuOption.values(), "Hospital Management Menu");
     }
 //This method to get the main sub menu options from the user
 
@@ -92,9 +96,9 @@ public class HospitalMenuHandler {
     }
 
 // Method to get the manager type options from the user
-    public static RoleType.ManagerOption getManagerTypeOption(Scanner scanner) {
+    public static RoleType.RoleOption getManagerTypeOption(Scanner scanner) {
 // Calls the generic getOption method with the manager type options
-        return getOption(scanner, RoleType.ManagerOption.values(), "Manager Department Options");
+        return getOption(scanner, RoleType.RoleOption.values(), "Role Department Options");
     }
 
 // Method to get the position type options from the user

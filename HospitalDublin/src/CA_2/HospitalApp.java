@@ -8,7 +8,7 @@ import java.io.File;//This imports the file class, which is used to interact wit
 import java.io.IOException;//Imports IOException for handling input and output erros when dealing with files.
 import java.util.ArrayList; //Imports Arraylist a dynamic array that can grow as needed.
 import java.util.List;//I used it for import a list, an interface for a group of objects
-import java.util.Scanner;//This imports scanner to read user input from the console
+import java.util.Scanner;//This imports userInput to read user input from the console
 
 /**
  * The main method will employ the logic to process the users choice by
@@ -25,8 +25,10 @@ public class HospitalApp { //This is the name of the main class
     private static final String APPOINTMENT_FILE = "patients_appointments.txt";//File to store employeedata
 
     public static void main(String[] args) { // The main method the entry point for the application
-        Scanner scanner = new Scanner(System.in);//Now I created a scanner object to read user input from the console
-        String applicantsFormFromFile = askForFileName(scanner);//Now I ask the user to input the name of the file containing application information
+        Scanner userInput = new Scanner(System.in);//Now I created a userInput object to read user input from the console
+        String applicantsFormFromFile = askForFileName(userInput);//Now I ask the user to input the name of the file containing application information
+//      In this part I will call the method to clean the fle datawhen the program will be executed
+        clearAllDataFiles();
 //      Now I created a list to store data read from files and user inputs
         List<String> applicants = new ArrayList<>();//List for the names of the applicants that I stored 50 names and surnames to be used when I will generate randonmlly the employees
         List<Employee> employees = new ArrayList<>();//List to hold employee objects 
@@ -49,28 +51,28 @@ public class HospitalApp { //This is the name of the main class
 //          Display main menu options to the user and gets their selection. 
 //          This part will access the class HospitalMenu and select the MenuOption that have the enum and store into the variable
 //          mainOption for use in the switch menu
-            HospitalMenu.MenuOption mainOption = HospitalMenuHandler.getMainOptions(scanner);
+            HospitalMenu.MenuOption mainOption = HospitalMenuHandler.getMainOptions(userInput);
             switch (mainOption) {//Perfoms actions based on the users menu selection
                 case MANAGE_EMPLOYEES://If user selects to manage employees
 //                 Thsi I will call the manager employees options
-                   EmployeeManage.manageEmployees(scanner, employees, applicants, applicantsFormFromFile);
+                   EmployeeManage.manageEmployees(userInput, employees, applicants, applicantsFormFromFile);
                     break;
                 case MANAGE_PATIENTS://If user selects to manage patients.
                     try {
-                        PatientManage.managePatients(scanner, patients);
+                        PatientManage.managePatients(userInput, patients);
                     } catch (IOException e) {
                         System.out.println("An error occurred while managing patients: " + e.getMessage());
                     }
                     break;
-                case EXIT://If user selects to exit the application
-                    exit = confirmExit(scanner);// Calls a method to confirm the users intention to exit
+                case EXIT_OF_THE_SYSTEM://If user selects to exit the application
+                    exit = confirmExit(userInput);// Calls a method to confirm the users intention to exit
                     break;
                 default://If the user selects an invalid option
                     System.out.println("Invalid option. Please try again.");
 //                  user of the invalid selection and ask to try again
             }
         }
-        scanner.close();//This close the scanner object
+        userInput.close();//This close the userInput object
     }
 //  This method its to request and validate the file name from the user
 

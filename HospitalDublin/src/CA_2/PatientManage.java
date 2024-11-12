@@ -53,7 +53,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
                     // Displays a list of scheduled appointments
                     handleShowPatientList(scanner, patients);
                     break;
-                case BACK:
+                case BACK_TO_MAIN_MENU:
                     // Exits the submenu and returns to the main menu
                     System.out.println("Going back to main menu...");
                     exitSubMenu = true;
@@ -108,33 +108,42 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         }
 
         // Get the doctor’s name for the patient
-        System.out.print("Enter doctor’s name: ");
+        System.out.print("Enter the doctor name: ");
         String doctorName = scanner.nextLine().trim();
-
         // Create a new Patient object using provided information
         Patient newPatient = new Patient(name, dateOfBirth, address, medicalIssue, departmentDepartmentOption, doctorName, null, null, null, "Unpaid");
-        patients.add(newPatient); // Add new patient to the list
 
-        // Display patient details after addition
-        System.out.println("\nPatient added:\n");
-        displayPatientDetails(newPatient);
+        // Show patient details for confirmation
+        System.out.println("\nPlease review the patient details:");
+        displayPatientDetails(newPatient); // Display patient details before confirmation
+        System.out.print("Are these details correct? (yes/no): ");
+        // getting the confirmation form the use using the method the I created in the main menu for validate others parts also
+        String confirmation = HospitalApp.getValidResponse(scanner);
 
-        // Ask if the user wants to schedule a consultation immediately for the new patient
-        System.out.print("Would you like to schedule a consultation for this patient now? (yes/no): ");
-        String response = scanner.nextLine().trim();
+        if (confirmation.equalsIgnoreCase("yes")) {
+            patients.add(newPatient); // Add new patient to the list only after confirmation
+            System.out.println("\nThe new patient details confirmed!");
 
-        if (response.equalsIgnoreCase("yes")) {
-            // Schedule consultation if user says "yes"
-            scheduleConsultationForPatient(scanner, newPatient);
-        } else {
-            // Save patient details to the file if no consultation is scheduled
-            try {
-                HospitalFileManage.writePatientToFile(newPatient, "patients.txt");
-                System.out.println("Patient details saved to patient file.");
-            } catch (IOException e) {
-                System.out.println("Error saving patient details to file: " + e.getMessage());
+            // Ask if the user wants to schedule a consultation immediately for the new patient
+            System.out.print("Would you like to schedule a consultation for this patient now? (yes/no): ");
+            String response = scanner.nextLine().trim();
+
+            if (response.equalsIgnoreCase("yes")) {
+                // Schedule consultation if user says "yes"
+                scheduleConsultationForPatient(scanner, newPatient);
+            } else {
+                // Save patient details to the file if no consultation is scheduled
+                try {
+                    HospitalFileManage.writePatientToFile(newPatient, "patients.txt");
+                    System.out.println("Patient details saved to patient file.");
+                } catch (IOException e) {
+                    System.out.println("Error saving patient details to file: " + e.getMessage());
+                }
             }
+        } else {
+            System.out.println("Patient details not saved.");
         }
+
     }
 
     // Method to handle scheduling a new consultation for any patient
@@ -281,12 +290,12 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         }
 
         // Get and validate the payment status
-        String paymentStatus = "";
-        while (!paymentStatus.equalsIgnoreCase("Paid") && !paymentStatus.equalsIgnoreCase("Unpaid")) {
-            System.out.print("Enter the payment status (Paid/Unpaid): ");
-            paymentStatus = scanner.nextLine().trim();
-            if (!paymentStatus.equalsIgnoreCase("Paid") && !paymentStatus.equalsIgnoreCase("Unpaid")) {
-                System.out.println("Invalid input. Please enter 'Paid' or 'Unpaid'.");
+        String medicalInsuranceStatus = "";
+        while (!medicalInsuranceStatus.equalsIgnoreCase("Active") && !medicalInsuranceStatus.equalsIgnoreCase("Inactive")) {
+            System.out.print("Enter the medical insurance status (Active/Inactive): ");
+            medicalInsuranceStatus = scanner.nextLine().trim();
+            if (!medicalInsuranceStatus.equalsIgnoreCase("Active") && !medicalInsuranceStatus.equalsIgnoreCase("Inactive")) {
+                System.out.println("Invalid input. Please enter 'Active' or 'Inactive'.");
             }
         }
 
@@ -294,7 +303,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         patient.setAppointmentDate(appointmentDate);
         patient.setAppointmentTime(appointmentTime);
         patient.setConsultationFee(consultationFee);
-        patient.setMedicalInsuranceStatus(paymentStatus);
+        patient.setMedicalInsuranceStatus(medicalInsuranceStatus);
 
         System.out.println("\nConsultation scheduled successfully for " + patient.getName() + "!\n");
 
@@ -487,7 +496,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
             if (patient.getAppointmentDate() != null) {
                 System.out.println("Appointment Date: " + patient.getAppointmentDate());
                 System.out.println("Appointment Time: " + patient.getAppointmentTime());
-                System.out.println("Payment Status: " + patient.getMedicalInsurancetatus());
+                System.out.println("Medical Insurance Status: " + patient.getMedicalInsurancetatus());
             }
 
             System.out.println(); // Empty line for readability between appointments

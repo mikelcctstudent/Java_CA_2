@@ -105,7 +105,7 @@ public class Patient extends Person { //This class called Patient thta will exte
     @Override //Overrides the toString() method to return a string representation of the Patient object
     public String toString() {
 //      Now I return all relevant details such as name, etc..
-        return "Name: " + name
+        return "\nName: " + name
                 + "\nDate of Birth: " + dateOfBirth
                 + "\nAddress: " + address
                 + "\nMedical Issue: " + address

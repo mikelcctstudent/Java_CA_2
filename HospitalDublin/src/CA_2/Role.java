@@ -31,6 +31,6 @@ public abstract class Role { // This abstract class called Role, and can't be in
     @Override// overrides the default toString() method to return a string representation of the Role object
     public String toString(){
 //      The returned string will include id and name
-        return "Manager{id='" + id + "', name='" + name + "'}";
+        return "Role{id='" + id + "', name='" + name + "'}";
     }
 }

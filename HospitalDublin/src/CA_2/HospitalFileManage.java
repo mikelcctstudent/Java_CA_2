@@ -50,7 +50,7 @@ public class HospitalFileManage {
             String address = null;
             BigDecimal salary = null;
             DepartmentType.DepartmentOption departmentOption = null;
-            RoleType.ManagerOption managerOption = null;
+            RoleType.RoleOption managerOption = null;
             PositionType.PositionOption positionOption = null;
             EmployeeType.EmployeeOption employeeType = null;
 
@@ -108,7 +108,7 @@ public class HospitalFileManage {
                     }
                 } else if (line.startsWith("Role: ")) {
                     try {
-                        managerOption = RoleType.ManagerOption.valueOf(line.substring(6).trim().toUpperCase());
+                        managerOption = RoleType.RoleOption.valueOf(line.substring(6).trim().toUpperCase());
                     } catch (IllegalArgumentException e) {
                         System.out.println("Invalid role type for line: " + line);
                     }
