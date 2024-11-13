@@ -32,7 +32,7 @@ public interface HospitalMenu {
         SORT,//0
         SEARCH,//1
         ADD_PATIENTS,//2
-        SCHEDULE_CONSULTATION,//3
+        SCHEDULE_PATIENT_APPOINTMENT,//3
         SHOW_APPOINTMENT_LIST,//4
         BACK_TO_MAIN_MENU//5
     }
@@ -40,7 +40,7 @@ public interface HospitalMenu {
 
     enum SortOption {
 
-        SEARCH_BY_NAME//0
+        SORT_BY_NAME//0
     }
     
 //  These are the menu options we would like to present to the user for show list options patients

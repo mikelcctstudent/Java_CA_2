@@ -1,9 +1,140 @@
-Name: MIKEL PINTO
-Date of Birth: 1993-02-13
-Address: DUBLIN 1
-Salary: 20000.00 EUR
+Name: Gideon Shaw
+Date of Birth: 1983-11-13
+Address: Dublin 1
+Salary: 124800.00 EUR
+Department: EMERGENCY
+Role: NURSE_MANAGER
+Position: RADIOLOGY_NURSE
+Type: NURSE
+Shift: Morning
+
+Name: Marshall Hahn
+Date of Birth: 1981-11-13
+Address: Dublin 2
+Salary: 104000.00 EUR
+Department: ADMINISTRATION
+Role: GENERAL_MANAGER
+Position: CLEANING_STAFF
+Type: GENERAL_STAFF
+
+Name: Everly Shannon
+Date of Birth: 1983-11-13
+Address: Dublin 3
+Salary: 104000.00 EUR
+Department: ADMINISTRATION
+Role: HR_MANAGER
+Position: HOSPITAL_ADMINISTRATIVE_ASSISTANT
+Type: ADMINISTRATIVE_ASSISTANT
+
+Name: Willie Richmond
+Date of Birth: 1985-11-13
+Address: Dublin 4
+Salary: 104000.00 EUR
+Department: ADMINISTRATION
+Role: HR_MANAGER
+Position: HOSPITAL_ADMINISTRATIVE_ASSISTANT
+Type: ADMINISTRATIVE_ASSISTANT
+
+Name: Sonny Rivera
+Date of Birth: 1991-11-13
+Address: Dublin 5
+Salary: 114400.00 EUR
 Department: ONCOLOGY
 Role: MEDICAL_DIRECTOR
-Position: DEPARTMENT_HEAD
+Position: RESIDENT_PHYSICIAN
 Type: DOCTOR
+
+Name: Michael Cotton
+Date of Birth: 1999-11-13
+Address: Dublin 6
+Salary: 104000.00 EUR
+Department: ADMINISTRATION
+Role: HR_MANAGER
+Position: HOSPITAL_ADMINISTRATIVE_ASSISTANT
+Type: ADMINISTRATIVE_ASSISTANT
+
+Name: Glenn Carroll
+Date of Birth: 1983-11-13
+Address: Dublin 7
+Salary: 124800.00 EUR
+Department: EMERGENCY
+Role: NURSE_MANAGER
+Position: RADIOLOGY_NURSE
+Type: NURSE
+Shift: Morning
+
+Name: Osian Lowe
+Date of Birth: 1976-11-13
+Address: Dublin 8
+Salary: 114400.00 EUR
+Department: ONCOLOGY
+Role: MEDICAL_DIRECTOR
+Position: RESIDENT_PHYSICIAN
+Type: DOCTOR
+
+Name: Savannah Holloway
+Date of Birth: 1989-11-13
+Address: Dublin 9
+Salary: 104000.00 EUR
+Department: ADMINISTRATION
+Role: HR_MANAGER
+Position: HOSPITAL_ADMINISTRATIVE_ASSISTANT
+Type: ADMINISTRATIVE_ASSISTANT
+
+Name: Danielle Lozano
+Date of Birth: 1985-11-13
+Address: Dublin 10
+Salary: 124800.00 EUR
+Department: EMERGENCY
+Role: NURSE_MANAGER
+Position: RADIOLOGY_NURSE
+Type: NURSE
+Shift: Morning
+
+Name: Mikey Hoffman
+Date of Birth: 1979-11-13
+Address: Dublin 11
+Salary: 124800.00 EUR
+Department: EMERGENCY
+Role: NURSE_MANAGER
+Position: RADIOLOGY_NURSE
+Type: NURSE
+Shift: Night
+
+Name: Denise Clay
+Date of Birth: 1988-11-13
+Address: Dublin 12
+Salary: 104000.00 EUR
+Department: ADMINISTRATION
+Role: GENERAL_MANAGER
+Position: CLEANING_STAFF
+Type: GENERAL_STAFF
+
+Name: Milan Guzman
+Date of Birth: 1977-11-13
+Address: Dublin 13
+Salary: 104000.00 EUR
+Department: ADMINISTRATION
+Role: HR_MANAGER
+Position: HOSPITAL_ADMINISTRATIVE_ASSISTANT
+Type: ADMINISTRATIVE_ASSISTANT
+
+Name: Rosemary Sullivan
+Date of Birth: 1999-11-13
+Address: Dublin 14
+Salary: 124800.00 EUR
+Department: EMERGENCY
+Role: NURSE_MANAGER
+Position: RADIOLOGY_NURSE
+Type: NURSE
+Shift: Morning
+
+Name: Sion Douglas
+Date of Birth: 1978-11-13
+Address: Dublin 15
+Salary: 104000.00 EUR
+Department: ADMINISTRATION
+Role: HR_MANAGER
+Position: HOSPITAL_ADMINISTRATIVE_ASSISTANT
+Type: ADMINISTRATIVE_ASSISTANT
 

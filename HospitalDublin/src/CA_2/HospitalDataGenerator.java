@@ -37,7 +37,7 @@ public class HospitalDataGenerator {
             LocalDate dob = LocalDate.now().minusYears(20 + random.nextInt(30));
 
             // Generate a basic address for the employee with a unique identifier
-            String address = "Address" + (employees.size() + 1);
+            String address = "Dublin " + (employees.size() + 1);
 
             // Randomly choose the type of employee (e.g., doctor, nurse, admin, etc.)
             EmployeeType.EmployeeOption employeeType = getRandomEmployeeType();

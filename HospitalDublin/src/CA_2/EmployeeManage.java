@@ -52,9 +52,9 @@ public class EmployeeManage {
                     break;
                 // If the user chooses to generate random employees
                 case GENERATE_RANDOM_EMPLOYEE:
-                    System.out.print("Enter the number of employees to generate: ");
-                    int limit = scanner.nextInt();
-                    scanner.nextLine();
+                    // Get the valid number of employees to generate without specifying a maximum
+                    int limit = getValidNumberOfEmployees(scanner);
+                    // Generate and save random employees with the valid limit obtained
                     generateAndSaveRandomEmployees(employees, limit, applicantsFormFile);
                     break;
                 // If the user chooses to view the list of employees
@@ -70,7 +70,7 @@ public class EmployeeManage {
 
                 // Default case if an invalid option is selected
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println("Invalid option. Please enter a number between 1 and 6!");
             }
         }
     }
@@ -95,11 +95,11 @@ public class EmployeeManage {
                     // Valid index: assign to employeeType
                     employeeType = employeeEmployeeOptions[selectedIndex];
                 } else {
-                    System.out.println("Invalid choice. Please enter a valid number.");
+                    System.out.println("Invalid choice. Please enter a number between 1 and 4!");
                 }
             } catch (NumberFormatException e) {
                 // Handle invalid input format, e.g., non-numeric input
-                System.out.println("Invalid choice. Please enter a valid number.");
+                System.out.println("Invalid choice. Please enter a number between 1 and 4!");
             }
         }
 
@@ -119,11 +119,11 @@ public class EmployeeManage {
                     // Valid index: assign to departmentOption
                     departmentOption = departmentDepartmentOptions[deptChoice];
                 } else {
-                    System.out.println("Invalid choice. Please enter a valid number.");
+                    System.out.println("Invalid choice. Please enter a number between 1 and 8!");
                 }
             } catch (NumberFormatException e) {
                 // Handle invalid input format, e.g., non-numeric input
-                System.out.println("Invalid choice. Please enter a valid number.");
+                System.out.println("Invalid choice. Please enter a number between 1 and 8!");
             }
         }
 
@@ -143,18 +143,18 @@ public class EmployeeManage {
                     // Valid index: assign to roleOption
                     roleOption = roleOptions[typeChoice];
                 } else {
-                    System.out.println("Invalid choice. Please enter a valid number.");
+                    System.out.println("Invalid choice. Please enter a number between 1 and 5!");
                 }
             } catch (NumberFormatException e) {
                 // Handle invalid input format, e.g., non-numeric input
-                System.out.println("Invalid choice. Please enter a valid number.");
+                System.out.println("Invalid choice. Please enter a number between 1 and 5!");
             }
         }
 
         // Prompt the user to choose the position type using PositionType.PositionOption
         PositionType.PositionOption positionPositionOption = null;
         while (positionPositionOption == null) { // Loop until a valid choice is made
-            System.out.println("Select the position type:");
+            System.out.print("Select the position type:");
             PositionType.PositionOption[] positionPositionOptions = PositionType.PositionOption.values();
             for (int i = 0; i < positionPositionOptions.length; i++) {
                 System.out.println((i + 1) + ". " + positionPositionOptions[i].name());
@@ -167,11 +167,11 @@ public class EmployeeManage {
                     // Valid index: assign to positionPositionOption
                     positionPositionOption = positionPositionOptions[posChoice];
                 } else {
-                    System.out.println("Invalid choice. Please enter a valid number.");
+                    System.out.println("Invalid choice. Please enter a number between 1 and 6!");
                 }
             } catch (NumberFormatException e) {
                 // Handle invalid input format, e.g., non-numeric input
-                System.out.println("Invalid choice. Please enter a valid number.");
+                System.out.println("Invalid choice. Please enter a number between 1 and 6!");
             }
         }
 
@@ -246,7 +246,7 @@ public class EmployeeManage {
         HospitalMenu.SortOption sortOption = HospitalMenuHandler.getSortOptions(scanner);
 
         // Check if the user wants to sort the list alphabetically
-        if (sortOption == HospitalMenu.SortOption.SEARCH_BY_NAME) {
+        if (sortOption == HospitalMenu.SortOption.SORT_BY_NAME) {
             // Perform sorting of the employee list
             employees = SortingAlgorithm.mergeSort(employees);
             displaySortedEmployees(employees, 20);
@@ -282,7 +282,7 @@ public class EmployeeManage {
                 employees = SortingAlgorithm.mergeSort(employees);
 
                 // Perform search by name and display results
-                String result = SearchingAlgorithm.searchEmployeeByName(employees, employeeSearchName);
+                String result = SearchingAlgorithm.searchEmployeesByName(employees, employeeSearchName);
                 System.out.println(result);
             } catch (Exception e) {
                 // Handle any errors during the search process
@@ -307,7 +307,7 @@ public class EmployeeManage {
             // If the user wants to populate the system with data
             if (response.equalsIgnoreCase("yes")) {
                 // Prompts the user for a valid number of employees to generate based on available applicant names
-                int limit = getValidNumberOfEmployees(scanner, applicants.size());
+                int limit = getValidNumberOfEmployees(scanner);
                 generateAndSaveRandomEmployees(employees, limit, applicantsFormFile);
 
                 // Asks if the user wants to continue with sorting after generating employees
@@ -323,7 +323,6 @@ public class EmployeeManage {
             } else {
                 // If the user doesn't want to populate, indicates that sorting is not possible
                 System.out.println("Cannot sort an empty list.");
-                return;
             }
         } else {
             // If the list is not empty, proceeds with sorting options directly
@@ -354,7 +353,7 @@ public class EmployeeManage {
             System.out.println("Date of Birth: " + employee.getDateOfBirth());
             System.out.println("Address: " + employee.getAddress());
             System.out.println("Salary: " + employee.getSalary());
-            System.out.println("DepartmentOption: " + employee.getDepartmentType().name());
+            System.out.println("Department: " + employee.getDepartmentType().name());
             System.out.println("Role: " + employee.getManagerType().name());
             System.out.println("Position: " + employee.getPositionType().name());
 
@@ -365,7 +364,7 @@ public class EmployeeManage {
             System.out.println(); // Blank line between employees
         }
     }
-    
+
 // Method to display details of a single employee
     public static void displayEmployeeDetails(Employee employee) {
         System.out.println("Name: " + employee.getName());
@@ -443,27 +442,27 @@ public class EmployeeManage {
     }
 
 // Method to get a valid number of employees from the user for generation
-    public static int getValidNumberOfEmployees(Scanner scanner, int availableNames) {
+    public static int getValidNumberOfEmployees(Scanner scanner) {
         int limit = 0; // Variable to store the number of employees the user wants to generate
         boolean validInput = false;
 
         // Loop until a valid input is obtained
         while (!validInput) {
-            System.out.println("Enter the number of employees to generate: ");
+            System.out.print("Enter the number of employees to generate: ");
             while (!scanner.hasNextInt()) {
                 // If input is not an integer, prompt the user to enter a valid number
                 System.out.println("Invalid input. Please enter a valid number.");
-                scanner.next(); // Discard the invalid input
+                scanner.nextLine(); // Discard the invalid input
             }
             limit = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character after input
 
             // Checks if the requested number of employees is within the available names limit
-            if (limit > 0 && limit <= availableNames) {
+            if (limit > 0) {
                 validInput = true; // Exit loop if the input is valid
             } else {
                 // Inform the user if the requested number exceeds available names
-                System.out.printf("The number of employees to be generated exceeds the available number of names. Available names: %d%n", availableNames);
+                System.out.println("Invalid input. Please enter a positive number!");
             }
         }
         return limit; // Return the valid number of employees to be generated
@@ -486,7 +485,7 @@ public class EmployeeManage {
             }
 
             // Displays the newly generated employees to the user
-            System.out.println("\nGenerated employees: ");
+            System.out.println("\nGenerated employees: \n");
             displayEmployees(newEmployees); // Calls method to display details of new employees
 
             // Prints a success message with the count of generated employees

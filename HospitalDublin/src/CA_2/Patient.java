@@ -72,7 +72,7 @@ public class Patient extends Person { //This class called Patient thta will exte
     }
 //  This method to get the payment status
 
-    public String getMedicalInsurancetatus() {
+    public String getMedicalInsuranceStatus() {
         return medicalInsurancetatus;
     }
 //   This method to set the consultation fee

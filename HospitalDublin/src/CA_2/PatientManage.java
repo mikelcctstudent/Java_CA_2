@@ -45,7 +45,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
                     // Adds a new patient to the list
                     addPatient(scanner, patients);
                     break;
-                case SCHEDULE_CONSULTATION:
+                case SCHEDULE_PATIENT_APPOINTMENT:
                     // Schedules a consultation for a patient
                     scheduleConsultation(scanner);
                     break;
@@ -91,8 +91,8 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         String medicalIssue = scanner.nextLine().trim();
 
         // Prompt for and select the medical department for the patient
-        DepartmentType.DepartmentOption departmentDepartmentOption = null;
-        while (departmentDepartmentOption == null) { // Loop until a valid option is selected
+        DepartmentType.DepartmentOption departmentOption = null;
+        while (departmentOption == null) { // Loop until a valid option is selected
             System.out.println("Select the medical department:");
             DepartmentType.DepartmentOption[] departmentDepartmentOptions = DepartmentType.DepartmentOption.values();
             for (int i = 0; i < departmentDepartmentOptions.length; i++) {
@@ -101,7 +101,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
             System.out.print("Please enter your choice: ");
             try {
                 int deptChoice = Integer.parseInt(scanner.nextLine().trim()); // Convert input to integer
-                departmentDepartmentOption = departmentDepartmentOptions[deptChoice - 1]; // Selects option
+                departmentOption = departmentDepartmentOptions[deptChoice - 1]; // Selects option
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("Invalid choice. Please enter a valid number."); // Error prompt
             }
@@ -111,7 +111,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         System.out.print("Enter the doctor name: ");
         String doctorName = scanner.nextLine().trim();
         // Create a new Patient object using provided information
-        Patient newPatient = new Patient(name, dateOfBirth, address, medicalIssue, departmentDepartmentOption, doctorName, null, null, null, "Unpaid");
+        Patient newPatient = new Patient(name, dateOfBirth, address, medicalIssue, departmentOption, doctorName, null, null, null, "Unpaid");
 
         // Show patient details for confirmation
         System.out.println("\nPlease review the patient details:");
@@ -148,7 +148,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
 
     // Method to handle scheduling a new consultation for any patient
     public static void scheduleConsultation(Scanner scanner) {
-        System.out.println("SCHEDULE CONSULTATION Selected:"); // Notify user of action
+        System.out.println("Schedule Appointment Selected:"); // Notify user of action
 
         // Prompt and retrieve patient details needed for scheduling
         System.out.print("Enter the name of the patient: ");
@@ -321,7 +321,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         // Display sorting options and get user choice
         HospitalMenu.SortOption sortOption = HospitalMenuHandler.getSortOptions(scanner);
 
-        if (sortOption == HospitalMenu.SortOption.SEARCH_BY_NAME) {
+        if (sortOption == HospitalMenu.SortOption.SORT_BY_NAME) {
             patients = SortingAlgorithm.mergeSortPatients(patients); // Sort patients alphabetically
             displaySortedPatients(patients, 20, scanner); // Display sorted list
 
@@ -349,7 +349,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
 
                 patients = SortingAlgorithm.mergeSortPatients(patients); // Sort patients to enable efficient search
 
-                String result = SearchingAlgorithm.searchPatientByName(patients, patientSearchName); // Search result
+                String result = SearchingAlgorithm.searchPatientsByName(patients, patientSearchName); // Search result
 
                 System.out.println(result); // Display search result
             } catch (Exception e) {
@@ -427,23 +427,21 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         }
     }
 
-    // Method to display the details of a specific patient
+// Method to display the details of a specific patient
     public static void displayPatientDetails(Patient patient) {
         System.out.println("Name: " + patient.getName());
         System.out.println("Date of Birth: " + patient.getDateOfBirth());
         System.out.println("Address: " + patient.getAddress());
         System.out.println("Medical Issue: " + patient.getMedicalIssue());
-        System.out.println("Medical DepartmentOption: " + patient.getMedicalDepartment().name());
+        System.out.println("Medical Department: " + patient.getMedicalDepartment().name());
         System.out.println("Doctor: " + patient.getDoctorName());
 
-        if (patient.getConsultationFee() != null) { // Display consultation fee if available
-            System.out.println("Consultation Fee: " + patient.getConsultationFee());
-        }
-
-        if (patient.getAppointmentDate() != null) { // Display appointment details if scheduled
+        // Print appointment details only if the appointment is scheduled
+        if (patient.getAppointmentDate() != null) {
             System.out.println("Appointment Date: " + patient.getAppointmentDate());
             System.out.println("Appointment Time: " + patient.getAppointmentTime());
-            System.out.println("Payment Status: " + patient.getMedicalInsurancetatus());
+            System.out.println("Consultation Fee: " + patient.getConsultationFee());
+            System.out.println("Medical Insurance Status: " + patient.getMedicalInsuranceStatus());
         }
     }
 
@@ -456,17 +454,15 @@ public class PatientManage {// Defines the PatientManage class, which handles th
             System.out.println("Date of Birth: " + patient.getDateOfBirth());
             System.out.println("Address: " + patient.getAddress());
             System.out.println("Medical Issue: " + patient.getMedicalIssue());
-            System.out.println("Medical DepartmentOption: " + patient.getMedicalDepartment().name());
-            System.out.println("Doctor: " + patient.getDoctorName());
+            System.out.println("Medical Department: " + patient.getMedicalDepartment().name());
+            System.out.println("Doctor: " + (patient.getDoctorName() != null ? patient.getDoctorName() : "N/A"));
 
-            if (patient.getConsultationFee() != null && patient.getConsultationFee().compareTo(BigDecimal.ZERO) > 0) {
-                System.out.println("Consultation Fee: " + patient.getConsultationFee());
-            }
-
+            // Only display appointment details if they are available
             if (patient.getAppointmentDate() != null) {
                 System.out.println("Appointment Date: " + patient.getAppointmentDate());
                 System.out.println("Appointment Time: " + patient.getAppointmentTime());
-                System.out.println("Payment Status: " + patient.getMedicalInsurancetatus());
+                System.out.println("Consultation Fee: " + patient.getConsultationFee());
+                System.out.println("Medical Insurance Status: " + (patient.getMedicalInsuranceStatus() != null ? patient.getMedicalInsuranceStatus() : "Not available"));
             }
 
             System.out.println(); // Empty line for readability between patients
@@ -475,7 +471,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         System.out.print("Would you like to export the sorted patient list to 'sorted_patients.txt'? (yes/no): ");
         String response = scanner.nextLine().trim();
         if (response.equalsIgnoreCase("yes")) {
-            HospitalFileManage.exportSortedPatientsToFile(patients); // Exporta a lista caso o usuário confirme
+            HospitalFileManage.exportSortedPatientsToFile(patients); // Exports the list if user confirms
         } else {
             System.out.println("Export operation cancelled.");
         }
@@ -490,13 +486,13 @@ public class PatientManage {// Defines the PatientManage class, which handles th
             System.out.println("Date of Birth: " + patient.getDateOfBirth());
             System.out.println("Address: " + patient.getAddress());
             System.out.println("Medical Issue: " + patient.getMedicalIssue());
-            System.out.println("Medical DepartmentOption: " + patient.getMedicalDepartment().name());
+            System.out.println("Medical Department: " + patient.getMedicalDepartment().name());
             System.out.println("Doctor: " + patient.getDoctorName());
 
             if (patient.getAppointmentDate() != null) {
                 System.out.println("Appointment Date: " + patient.getAppointmentDate());
                 System.out.println("Appointment Time: " + patient.getAppointmentTime());
-                System.out.println("Medical Insurance Status: " + patient.getMedicalInsurancetatus());
+                System.out.println("Medical Insurance Status: " + patient.getMedicalInsuranceStatus());
             }
 
             System.out.println(); // Empty line for readability between appointments
