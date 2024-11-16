@@ -53,18 +53,18 @@ public class HospitalApp { //This is the name of the main class
 //          mainOption for use in the switch menu
             HospitalMenu.MenuOption mainOption = HospitalMenuHandler.getMainOptions(userInput);
             switch (mainOption) {//Perfoms actions based on the users menu selection
-                case MANAGE_EMPLOYEES://If user selects to manage employees
+                case Manage_Employees://If user selects to manage employees
 //                 Thsi I will call the manager employees options
                    EmployeeManage.manageEmployees(userInput, employees, applicants, applicantsFormFromFile);
                     break;
-                case MANAGE_PATIENTS://If user selects to manage patients.
+                case Manage_Patients://If user selects to manage patients.
                     try {
                         PatientManage.managePatients(userInput, patients);
                     } catch (IOException e) {
                         System.out.println("An error occurred while managing patients: " + e.getMessage());
                     }
                     break;
-                case EXIT_OF_THE_SYSTEM://If user selects to exit the application
+                case Exit_Of_The_System://If user selects to exit the application
                     exit = confirmExit(userInput);// Calls a method to confirm the users intention to exit
                     break;
                 default://If the user selects an invalid option

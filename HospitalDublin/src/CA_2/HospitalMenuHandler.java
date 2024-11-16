@@ -78,15 +78,15 @@ public class HospitalMenuHandler {
     }
 
 // Method to get the show list options for patients from the user
-    public static HospitalMenu.ShowListOptionPatient getShowListOptionsPatients(Scanner scanner) {
+    public static HospitalMenu.DisplayListOptionPatients getShowListOptionsPatients(Scanner scanner) {
 // Calls the generic getOption method with the show list options for patients
-        return getOption(scanner, HospitalMenu.ShowListOptionPatient.values(), "Show List Options for Patients");
+        return getOption(scanner, HospitalMenu.DisplayListOptionPatients.values(), "Show List Options for Patients");
     }
 
 // Method to get the show list options from the user
-    public static HospitalMenu.ShowListOption getShowListOptions(Scanner scanner) {
+    public static HospitalMenu.DisplayListOptionEmployees getShowListOptions(Scanner scanner) {
 // Calls the generic getOption method with the show list options
-        return getOption(scanner, HospitalMenu.ShowListOption.values(), "Show List Options");
+        return getOption(scanner, HospitalMenu.DisplayListOptionEmployees.values(), "Show List Options");
     }
 
 // Method to get the employee type options from the user

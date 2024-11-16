@@ -8,18 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Method to perform a merge sort on a list of Employee objects by name.
- * This method divides the list into smaller sublists, recursively sorts each
- * sublist, and then merges them back together in sorted order.
- * Sorting is performed in a case-insensitive manner to ensure consistency in
- * the results, especially for names with mixed capitalization.
- * 
+ * Method to perform a merge sort on a list of Employee objects by name. This
+ * method divides the list into smaller sublists, recursively sorts each
+ * sublist, and then merges them back together in sorted order. Sorting is
+ * performed in a case-insensitive manner to ensure consistency in the results,
+ * especially for names with mixed capitalization.
+ *
  * The method uses the "divide and conquer" approach of merge sort, making it
  * efficient for large lists with a time complexity of O(n log n).
+ *
  * @author Mikel
  */
 public class SortingAlgorithm {
-     // Main method to perform Merge Sort on a list of Employee objects
+    // Main method to perform Merge Sort on a list of Employee objects
+
     public static List<Employee> mergeSort(List<Employee> list) {
         // Base case: if the list has one or zero elements, it is already sorted
         if (list.size() <= 1) {
@@ -116,5 +118,5 @@ public class SortingAlgorithm {
         // Return the merged and sorted list
         return sortedList;
     }
-    
+
 }

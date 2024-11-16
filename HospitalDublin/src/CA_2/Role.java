@@ -5,6 +5,7 @@
 package CA_2; // This is the package to which the abstract class Role belongs
 
 /**
+ * This class contains the role attributes and constructors, and the getters.
  *
  * @author Mikel
  */
@@ -14,22 +15,25 @@ public abstract class Role { // This abstract class called Role, and can't be in
 //final for dont be changed once they are set
     private final String id;
     private final String name;
-    
-    protected Role(String id, String name){ //This part the constructor was declared as a protected for a manager object
+
+    public Role(String id, String name) { //This part the constructor was declared as a protected for a manager object
 //      and this constructor can only be called within the same package or by subclass
         this.id = id;
         this.name = name;
     }
 //  This method to get the value of id
-    public String getId(){
+
+    public String getId() {
         return id;
     }
 //   this method to get the value of name
-    public String getName(){
+
+    public String getName() {
         return name;
     }
+
     @Override// overrides the default toString() method to return a string representation of the Role object
-    public String toString(){
+    public String toString() {
 //      The returned string will include id and name
         return "Role{id='" + id + "', name='" + name + "'}";
     }

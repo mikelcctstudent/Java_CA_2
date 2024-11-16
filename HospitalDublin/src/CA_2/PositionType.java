@@ -6,17 +6,20 @@ package CA_2;// This is the package to which the interface PositionType belongs
 
 /**
  *
+ * This class will have all the enums for position type
+ *
  * @author Mikel
  */
 public interface PositionType {
-    enum PositionOption{
+
+    enum PositionOption {
 //      These are the menu options we would like to present to the user for the positions types
-        DOCTOR_ASSISTANT, //0
-        RESIDENT_PHYSICIAN, //1
-        HOSPITAL_ADMINISTRATIVE_ASSISTANT,//2
-        DEPARTMENT_HEAD,//3
-        RADIOLOGY_NURSE,//4
-        CLEANING_STAFF//5
+        Surgeon, //0
+        Geriatric_Medicine, //1
+        Administrative_Assistant,//2
+        Human_Resources_Manager,//3
+        Radiology_Nurse,//4
+        Cleaner//5
     }
-    
+
 }

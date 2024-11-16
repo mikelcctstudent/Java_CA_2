@@ -5,20 +5,22 @@
 package CA_2;// This is the package to which the enum interface DepartmentType belongs
 
 /**
+ * This class is responsible for department enums
  *
- * @author Microsoft
+ * @author Mikel
  */
 public interface DepartmentType {
 //  These are the menu options we would like to present to the user for the department option
 
     enum DepartmentOption {
-        CARDIOLOGY,//0
-        NEUROLOGY,//1
-        ONCOLOGY,//2
-        EMERGENCY,//3
-        PEDIATRICS,//4
-        ORTHOPEDICS,//5
-        ADMINISTRATION,//6
-        SUPPORT_SERVIVES//7
+        // These are the menu options we would like to present to the user
+        Cardiology,//0
+        Neurology,//1
+        Oncology,//2
+        Emergency,//3
+        Pediatrics,//4
+        Orthopedics,//5
+        Human_Resources,//6
+        General_Services//7
     }
 }

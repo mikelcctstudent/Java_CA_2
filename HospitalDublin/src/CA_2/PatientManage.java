@@ -4,6 +4,7 @@
  */
 package CA_2;
 
+// Packges that we areusing in this class
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,6 +16,9 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
+ * This class will managing al patient operations, that will include adding a
+ * new patient, sorting, scheduling , search an also we will display any
+ * information related
  *
  * @author Mikel
  */
@@ -33,27 +37,27 @@ public class PatientManage {// Defines the PatientManage class, which handles th
 
             // Process the chosen option using a switch statement
             switch (patientOption) {
-                case SORT:
+                case Sort_Patients_List:
                     // Sorts the patients
                     handleSortPatients(scanner, patients);
                     break;
-                case SEARCH:
+                case Search_Patients_List:
                     // Searches for patients based on user criteria
                     handleSearchPatients(scanner, patients);
                     break;
-                case ADD_PATIENTS:
+                case Add_A_New_Patient_In_The_System:
                     // Adds a new patient to the list
                     addPatient(scanner, patients);
                     break;
-                case SCHEDULE_PATIENT_APPOINTMENT:
+                case Schedule_A_New_Patient_Appointment:
                     // Schedules a consultation for a patient
                     scheduleConsultation(scanner);
                     break;
-                case SHOW_APPOINTMENT_LIST:
+                case Display_Patients:
                     // Displays a list of scheduled appointments
                     handleShowPatientList(scanner, patients);
                     break;
-                case BACK_TO_MAIN_MENU:
+                case Back_To_Main_Menu:
                     // Exits the submenu and returns to the main menu
                     System.out.println("Going back to main menu...");
                     exitSubMenu = true;
@@ -321,8 +325,8 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         // Display sorting options and get user choice
         HospitalMenu.SortOption sortOption = HospitalMenuHandler.getSortOptions(scanner);
 
-        if (sortOption == HospitalMenu.SortOption.SORT_BY_NAME) {
-            patients = SortingAlgorithm.mergeSortPatients(patients); // Sort patients alphabetically
+        if (sortOption == HospitalMenu.SortOption.Sort_By_Name) {
+            patients = SortingAlgorithm.mergeSortPatients(patients); // Sort_Patients_List patients alphabetically
             displaySortedPatients(patients, 20, scanner); // Display sorted list
 
             if (showExportPrompt) { // Optionally prompt for exporting sorted list
@@ -342,12 +346,12 @@ public class PatientManage {// Defines the PatientManage class, which handles th
     // Method to handle search options for patients and display results
     public static void searchOptionsPatients(Scanner scanner, List<Patient> patients) {
         HospitalMenu.SearchOption searchOption = HospitalMenuHandler.getSearchOptions(scanner);
-        if (Objects.requireNonNull(searchOption) == HospitalMenu.SearchOption.SEARCH_BY_NAME) {
+        if (Objects.requireNonNull(searchOption) == HospitalMenu.SearchOption.Search_By_Name) {
             try {
                 System.out.print("Enter name to search: ");
                 String patientSearchName = scanner.nextLine().trim();
 
-                patients = SortingAlgorithm.mergeSortPatients(patients); // Sort patients to enable efficient search
+                patients = SortingAlgorithm.mergeSortPatients(patients); // Sort_Patients_List patients to enable efficient search
 
                 String result = SearchingAlgorithm.searchPatientsByName(patients, patientSearchName); // Search result
 
@@ -381,7 +385,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
                 System.out.println("Cannot sort an empty list."); // Alert for empty list
             }
         } else {
-            // Sort and display options directly on the list in memory
+            // Sort_Patients_List and display options directly on the list in memory
             sortOptionsPatients(scanner, patients, false);
         }
     }
@@ -401,19 +405,19 @@ public class PatientManage {// Defines the PatientManage class, which handles th
 
     // Method to handle showing different patient lists, like sorted patient lists or appointment lists
     public static void handleShowPatientList(Scanner scanner, List<Patient> patients) {
-        HospitalMenu.ShowListOptionPatient showListOptionPatient = HospitalMenuHandler.getShowListOptionsPatients(scanner);
+        HospitalMenu.DisplayListOptionPatients showListOptionPatient = HospitalMenuHandler.getShowListOptionsPatients(scanner);
         switch (showListOptionPatient) {
-            case SHOW_SORTED_PATIENTS:
+            case Display_Sorted_Patients_List:
 
                 if (patients.isEmpty()) {
                     System.out.println("\nThe patient list is empty.");
                 } else {
-                    patients = SortingAlgorithm.mergeSortPatients(patients); // Sort patients
+                    patients = SortingAlgorithm.mergeSortPatients(patients); // Sort_Patients_List patients
                     System.out.println("\nSorted Patient list: ");
                     displaySortedPatients(patients, 20, scanner);
                 }
                 break;
-            case SHOW_SORTED_SCHEDULES:
+            case Display_Sorted_Patients_Schedules_List:
                 if (patients.isEmpty()) {
                     System.out.println("\nThe patient list is empty.");
                 } else {

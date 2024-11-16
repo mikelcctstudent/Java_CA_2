@@ -9,16 +9,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
+ * For this class will represent patient in the system and also extends the
+ * abstract PErson class
  *
  * @author Mikel
  */
 public class Patient extends Person { //This class called Patient thta will extends the abstract class Person
 
-    private String medicalIssue;// This private instance variable to store the medical issue of the patient
-    private DepartmentType.DepartmentOption medicalDepartmentOption; //this variable to store the department option from the enum option
-    private String doctorName; // For this private variable to store the name of the doctor.
+    private final String medicalIssue;// This private instance variable to store the medical issue of the patient
+    private final DepartmentType.DepartmentOption medicalDepartmentOption; //this variable to store the department option from the enum option
+    private final String doctorName; // For this private variable to store the name of the doctor.
     private BigDecimal consultationFee;//this private variable to store the date of the appoitment
-    private LocalDate appointmentDate;//This private instance variable to store the date of the patient appointment
+    private final LocalDate appointmentDate;//This private instance variable to store the date of the patient appointment
     private LocalTime appointmentTime;//To store the time of the patient appointment
     private String medicalInsurancetatus;//variable to store the payment status(paid/unpaid)
 
@@ -91,12 +93,12 @@ public class Patient extends Person { //This class called Patient thta will exte
         this.medicalInsurancetatus = paymentStatus;
     }
 //  This public method to set the consultation fee 
-       public void setConsultationFee(BigDecimal consultationFee) {
+
+    public void setConsultationFee(BigDecimal consultationFee) {
         this.consultationFee = consultationFee;
     }
 
 //  This implements the getType() method from the Person class to return "Patient"    
-
     @Override
     public String getType() {
         return "Patient";

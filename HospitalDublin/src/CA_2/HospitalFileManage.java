@@ -362,7 +362,7 @@ public class HospitalFileManage {
             writer.write("Type: " + employee.getEmployeeOption().name() + "\n"); // Write employee type
 
             // Check if the employee is a nurse and add shift details if available
-            if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.NURSE) {
+            if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.Nurse) {
                 writer.write("Shift: " + (employee.getShift() != null ? employee.getShift() : "N/A") + "\n");
             }
 

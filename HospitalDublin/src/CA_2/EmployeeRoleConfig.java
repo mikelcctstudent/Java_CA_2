@@ -7,69 +7,68 @@ package CA_2;// Declares the package name where this class belongs
 import java.util.Map; // Import statement for using the Map interface
 
 /**
+ * This class will be responsible for defining mapping between employee types,
+ * departments, positions, and roles, and this will help ensure that each
+ * employee type is associated with the appropriate type in the system.
  *
  * @author Mikel
  */
 public class EmployeeRoleConfig {// Class to map coherent combinations between EmployeeType, Department, Position, and Role
 
-
     // A public static final Map that links each EmployeeType.EmployeeOption to an array of appropriate DepartmentType.DepartmentOption(s)
-    public static final Map<EmployeeType.EmployeeOption, DepartmentType.DepartmentOption[]> DEPARTMENT_OPTIONS = Map.of(
-            // For EmployeeType DOCTOR, associate the departments: CARDIOLOGY, NEUROLOGY, ONCOLOGY
-            EmployeeType.EmployeeOption.DOCTOR, new DepartmentType.DepartmentOption[]{
-                    DepartmentType.DepartmentOption.CARDIOLOGY,
-                    DepartmentType.DepartmentOption.NEUROLOGY,
-                    DepartmentType.DepartmentOption.ONCOLOGY,
-                    DepartmentType.DepartmentOption.EMERGENCY
+    public static final Map<EmployeeType.EmployeeOption, DepartmentType.DepartmentOption[]> DEPARTMENT_OPTIONS = Map.of(// For EmployeeType Doctor, associate the departments: Cardiology, Neurology, Oncology
+            EmployeeType.EmployeeOption.Doctor, new DepartmentType.DepartmentOption[]{
+                DepartmentType.DepartmentOption.Cardiology,
+                DepartmentType.DepartmentOption.Neurology,
+                DepartmentType.DepartmentOption.Oncology,
+                DepartmentType.DepartmentOption.Emergency
             },
-            // For EmployeeType NURSE, associate the departments: PEDIATRICS, EMERGENCY, ORTHOPEDICS
-            EmployeeType.EmployeeOption.NURSE, new DepartmentType.DepartmentOption[]{
-                    DepartmentType.DepartmentOption.PEDIATRICS,
-                    DepartmentType.DepartmentOption.EMERGENCY,
-                    DepartmentType.DepartmentOption.ORTHOPEDICS
+            // For EmployeeType Nurse, associate the departments: Pediatrics, Emergency, Orthopedics
+            EmployeeType.EmployeeOption.Nurse, new DepartmentType.DepartmentOption[]{
+                DepartmentType.DepartmentOption.Pediatrics,
+                DepartmentType.DepartmentOption.Emergency,
+                DepartmentType.DepartmentOption.Orthopedics
             },
-            // For EmployeeType ADMINISTRATIVE_ASSISTANT, associate the department: ADMINISTRATION
-            EmployeeType.EmployeeOption.ADMINISTRATIVE_ASSISTANT, new DepartmentType.DepartmentOption[]{
-                    DepartmentType.DepartmentOption.ADMINISTRATION
+            // For EmployeeType Administrative_Assistant, associate the department: Human_Resources
+            EmployeeType.EmployeeOption.Administrative_Assistant, new DepartmentType.DepartmentOption[]{
+                DepartmentType.DepartmentOption.Human_Resources
             },
-            // For EmployeeType GENERAL_STAFF, associate the departments: EMERGENCY, ADMINISTRATION, SUPPORT_SERVICES
-            EmployeeType.EmployeeOption.GENERAL_STAFF, new DepartmentType.DepartmentOption[]{
-                    DepartmentType.DepartmentOption.ADMINISTRATION,
-                    DepartmentType.DepartmentOption.SUPPORT_SERVIVES
+            // For EmployeeType General_Staff, associate the departments: Emergency, Human_Resources, SUPPORT_SERVICES
+            EmployeeType.EmployeeOption.General_Staff, new DepartmentType.DepartmentOption[]{
+                DepartmentType.DepartmentOption.Human_Resources,
+                DepartmentType.DepartmentOption.General_Services
             }
     );
 
     // A public static final Map that links each EmployeeType.EmployeeOption to an array of appropriate PositionType.PositionOption(s)
-    public static final Map<EmployeeType.EmployeeOption, PositionType.PositionOption[]> POSITION_OPTIONS = Map.of(
-            // For EmployeeType DOCTOR, associate the positions: DOCTOR_ASSISTANT, RESIDENT_PHYSICIAN
-            EmployeeType.EmployeeOption.DOCTOR, new PositionType.PositionOption[]{
-                    PositionType.PositionOption.DOCTOR_ASSISTANT,
-                    PositionType.PositionOption.RESIDENT_PHYSICIAN
+    public static final Map<EmployeeType.EmployeeOption, PositionType.PositionOption[]> POSITION_OPTIONS = Map.of(// For EmployeeType Doctor, associate the positions: Surgeon, Geriatric_Medicine
+            EmployeeType.EmployeeOption.Doctor, new PositionType.PositionOption[]{
+                PositionType.PositionOption.Surgeon,
+                PositionType.PositionOption.Geriatric_Medicine
             },
-            // For EmployeeType NURSE, associate the position: RADIOLOGY_NURSE
-            EmployeeType.EmployeeOption.NURSE, new PositionType.PositionOption[]{
-                    PositionType.PositionOption.RADIOLOGY_NURSE
+            // For EmployeeType Nurse, associate the position: Radiology_Nurse
+            EmployeeType.EmployeeOption.Nurse, new PositionType.PositionOption[]{
+                PositionType.PositionOption.Radiology_Nurse
             },
-            // For EmployeeType ADMINISTRATIVE_ASSISTANT, associate the position: HOSPITAL_ADMINISTRATIVE_ASSISTANT
-            EmployeeType.EmployeeOption.ADMINISTRATIVE_ASSISTANT, new PositionType.PositionOption[]{
-                    PositionType.PositionOption.HOSPITAL_ADMINISTRATIVE_ASSISTANT
+            // For EmployeeType Administrative_Assistant, associate the position: Administrative_Assistant
+            EmployeeType.EmployeeOption.Administrative_Assistant, new PositionType.PositionOption[]{
+                PositionType.PositionOption.Administrative_Assistant
             },
-            // For EmployeeType GENERAL_STAFF, associate the position: CLEANING_STAFF
-            EmployeeType.EmployeeOption.GENERAL_STAFF, new PositionType.PositionOption[]{
-                    PositionType.PositionOption.CLEANING_STAFF
+            // For EmployeeType General_Staff, associate the position: Cleaner
+            EmployeeType.EmployeeOption.General_Staff, new PositionType.PositionOption[]{
+                PositionType.PositionOption.Cleaner
             }
     );
 
     // A public static final Map that links each EmployeeType.EmployeeOption to a specific RoleType.RoleOption (manager role)
-    public static final Map<EmployeeType.EmployeeOption, RoleType.RoleOption> MANAGER_OPTIONS = Map.of(
-            // For EmployeeType DOCTOR, the manager is MEDICAL_DIRECTOR
-            EmployeeType.EmployeeOption.DOCTOR, RoleType.RoleOption.MEDICAL_DIRECTOR,
-            // For EmployeeType NURSE, the manager is NURSE_MANAGER
-            EmployeeType.EmployeeOption.NURSE, RoleType.RoleOption.NURSE_MANAGER,
-            // For EmployeeType ADMINISTRATIVE_ASSISTANT, the manager is HR_MANAGER
-            EmployeeType.EmployeeOption.ADMINISTRATIVE_ASSISTANT, RoleType.RoleOption.HR_MANAGER,
-            // For EmployeeType GENERAL_STAFF, the manager is GENERAL_MANAGER
-            EmployeeType.EmployeeOption.GENERAL_STAFF, RoleType.RoleOption.GENERAL_MANAGER
+    public static final Map<EmployeeType.EmployeeOption, RoleType.RoleOption> ROLE_OPTIONS = Map.of(// For EmployeeType Doctor, the manager is Medical_Director
+            EmployeeType.EmployeeOption.Doctor, RoleType.RoleOption.Medical_Director,
+            // For EmployeeType Nurse, the manager is Nurse_Administrator
+            EmployeeType.EmployeeOption.Nurse, RoleType.RoleOption.Nurse_Administrator,
+            // For EmployeeType Administrative_Assistant, the manager is HR_Manager
+            EmployeeType.EmployeeOption.Administrative_Assistant, RoleType.RoleOption.HR_Manager,
+            // For EmployeeType General_Staff, the manager is General_Manager
+            EmployeeType.EmployeeOption.General_Staff, RoleType.RoleOption.General_Manager
     );
-    
+
 }

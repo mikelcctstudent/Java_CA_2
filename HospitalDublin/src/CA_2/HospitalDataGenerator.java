@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * This class I created to be responsible for generating random employee
  *
  * @author Mikel
  */
@@ -49,7 +50,7 @@ public class HospitalDataGenerator {
             PositionType.PositionOption position = getRandomElement(EmployeeRoleConfig.POSITION_OPTIONS.get(employeeType));
 
             // Get a manager role for the employee type to assign a reporting structure
-            RoleType.RoleOption manager = EmployeeRoleConfig.MANAGER_OPTIONS.get(employeeType);
+            RoleType.RoleOption manager = EmployeeRoleConfig.ROLE_OPTIONS.get(employeeType);
 
             // Calculate an hourly rate for the employee based on the chosen department
             BigDecimal hourlyRate = salaryPolicy.getHourlyRate(department);
@@ -61,7 +62,7 @@ public class HospitalDataGenerator {
             Employee employee = new Employee(name, dob, address, calculatedSalary, department, manager, position, employeeType);
 
             // Set additional attributes if the employee type is Nurse
-            if (employeeType == EmployeeType.EmployeeOption.NURSE) {
+            if (employeeType == EmployeeType.EmployeeOption.Nurse) {
                 String shift = getRandomShift(); // Randomly select a shift
                 employee.setShift(shift);
             }

@@ -23,28 +23,32 @@ public abstract class Person { // Declares anabstract class called person that c
         this.dateOfBirth = dateOfBirth; // will sets the instance variable dateOfBirth with the provided value
         this.address = address; // will sets the instance variable address with the provided value
     }
-    
+
 //    this public method to get the value of name
-    public String getName(){
+    public String getName() {
         return name;
     }
 //    this public method to get the value of dateOfBirth
-    public LocalDate getDateOfBirth(){
+
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 //   this method to get the value of address
-    public String getAddress(){
+
+    public String getAddress() {
         return address;
     }
 //  This abstract method to ensure that subclasses define their type
+
     public abstract String getType();
 //  Overrides the toString() method from the object class
+
     @Override
-    public String toString(){
+    public String toString() {
 //   return a string for representation of the Person object, including name, date of birth, and address.
-     return "Name: " + name +
-            "\nDate of Birth: " + dateOfBirth +
-             "\nAddress: " + address;
-            
-             }
+        return "Name: " + name
+                + "\nDate of Birth: " + dateOfBirth
+                + "\nAddress: " + address;
+
+    }
 }

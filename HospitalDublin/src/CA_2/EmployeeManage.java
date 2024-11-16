@@ -4,6 +4,7 @@
  */
 package CA_2;
 
+//Packages that Im using in this program
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,6 +15,11 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
+ * This class will contain all the logic and methods for employee manage in the
+ * system will managing all operations related to employees, for example I
+ * created methods for adding, generating, sorting, searching and for display
+ * employees The logic that I used is structured to ensure employees can be
+ * managed the easy way.
  *
  * @author Mikel
  */
@@ -24,7 +30,15 @@ public class EmployeeManage {
 
 // Main method to manage all employee-related operations
     public static void manageEmployees(Scanner scanner, List<Employee> employees, List<String> applicants, String applicantsFormFile) {
-        // Flag to control when to exit the submenu
+//      This method check if the list of employees is empty and will generate automaticaly 20 employees 
+        if (employees.isEmpty()) {
+            generateAndSaveRandomEmployees(employees, 20, applicantsFormFile);// Will generate 20 empployees automatcally in the system
+        }
+//       display the first 20 employees when start the menu of employees
+        System.out.println("\nList of employees in the system: ");
+        displayEmployees(employees, 20);// show the 20 first employees
+
+// Flag to control when to exit the submenu
         boolean exitSubMenu = false;
 
         // Loop that continues to show options until the user chooses to exit
@@ -35,35 +49,35 @@ public class EmployeeManage {
             // Use switch to handle each possible menu option for employee management
             switch (employeeOption) {
                 // If the user chooses to sort employees
-                case SORT:
+                case Sort_Employees_List:
                     handleSortEmployees(scanner, employees, applicants, applicantsFormFile);
                     break;
 
                 // If the user chooses to search for employees
-                case SEARCH:
+                case Search_Employees_List:
                     // Calls the method to handle searching for employees based on user input.
                     // This will perform the actual search operation using the updated employee list.
                     handleSearchEmployees(scanner, employees);
                     break;
 
                 // If the user chooses to add a new employee
-                case ADD_EMPLOYEE:
+                case Add_A_New_Employee_In_The_System:
                     addEmployee(scanner, employees);
                     break;
                 // If the user chooses to generate random employees
-                case GENERATE_RANDOM_EMPLOYEE:
+                case Generate_Random_Employees:
                     // Get the valid number of employees to generate without specifying a maximum
                     int limit = getValidNumberOfEmployees(scanner);
                     // Generate and save random employees with the valid limit obtained
                     generateAndSaveRandomEmployees(employees, limit, applicantsFormFile);
                     break;
                 // If the user chooses to view the list of employees
-                case SHOW_EMPLOYEE_LIST:
+                case Display_Employee:
                     handleShowEmployeeList(scanner, employees);
                     break;
 
                 // If the user wants to go back to the main menu
-                case BACK_TO_MAIN_MENU:
+                case Back_To_Main_Menu:
                     System.out.println("Going back to main menu...");
                     exitSubMenu = true; // Sets the flag to true to exit the loop
                     break;
@@ -210,7 +224,7 @@ public class EmployeeManage {
         Employee newEmployee = new Employee(name, dateOfBirth, address, salary, departmentOption, roleOption, positionPositionOption, employeeType);
 
         // Set additional attributes based on the specific employee type
-        if (employeeType == EmployeeType.EmployeeOption.NURSE) {
+        if (employeeType == EmployeeType.EmployeeOption.Nurse) {
             System.out.print("Enter shift: ");
             String shift = scanner.nextLine();
             newEmployee.setShift(shift); // Set shift for nurse
@@ -229,7 +243,6 @@ public class EmployeeManage {
             System.out.println("The new employee details confirmed!");
             try {
                 HospitalFileManage.writeEmployeeToFile(newEmployee, EMPLOYEE_FILE);
-                employees.add(newEmployee); // Add to in-memory list for consistency
                 System.out.println("\nEmployee details saved successfully.");
             } catch (IOException e) {
                 // Display an error message if file writing fails
@@ -246,7 +259,7 @@ public class EmployeeManage {
         HospitalMenu.SortOption sortOption = HospitalMenuHandler.getSortOptions(scanner);
 
         // Check if the user wants to sort the list alphabetically
-        if (sortOption == HospitalMenu.SortOption.SORT_BY_NAME) {
+        if (sortOption == HospitalMenu.SortOption.Sort_By_Name) {
             // Perform sorting of the employee list
             employees = SortingAlgorithm.mergeSort(employees);
             displaySortedEmployees(employees, 20);
@@ -262,7 +275,7 @@ public class EmployeeManage {
                 System.out.println("Export operation cancelled.");
             }
         } else {
-            // Display message if sorting option is invalid
+            // In this line will display message if sorting option is invalid
             System.out.println("Invalid option. Please try again.");
         }
     }
@@ -273,9 +286,9 @@ public class EmployeeManage {
         HospitalMenu.SearchOption searchOption = HospitalMenuHandler.getSearchOptions(scanner);
 
         // Check if the user wants to search employees by name
-        if (Objects.requireNonNull(searchOption) == HospitalMenu.SearchOption.SEARCH_BY_NAME) {
+        if (Objects.requireNonNull(searchOption) == HospitalMenu.SearchOption.Search_By_Name) {
             try {
-                System.out.print("Enter name to search: ");
+                System.out.print("Enter name to search: \n");
                 String employeeSearchName = scanner.nextLine().trim();
 
                 // Sort the employee list first to ensure a faster and more accurate search
@@ -346,9 +359,15 @@ public class EmployeeManage {
     }
 
 // Method to display employee details
-    public static void displayEmployees(List<Employee> employees) {
+    public static void displayEmployees(List<Employee> employees, int limit) {
+        // Displays a header indicating that sorted employees are being listed
+        System.out.println("\nList of employees: \n");
+
         // Iterates through each employee in the list and displays their details
-        for (Employee employee : employees) {
+        for (int i = 0; i < limit && i < employees.size(); i++) {
+            Employee employee = employees.get(i);
+//          Display the number of the employee in the list (1....20)
+            System.out.println("Employee " + (i + 1) + ":");
             System.out.println("Name: " + employee.getName());
             System.out.println("Date of Birth: " + employee.getDateOfBirth());
             System.out.println("Address: " + employee.getAddress());
@@ -358,7 +377,7 @@ public class EmployeeManage {
             System.out.println("Position: " + employee.getPositionType().name());
 
             // Checks the specific type of the employee and displays additional information accordingly
-            if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.NURSE) {
+            if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.Nurse) {
                 System.out.println("Shift: " + (employee.getShift() != null ? employee.getShift() : "N/A"));
             }
             System.out.println(); // Blank line between employees
@@ -376,19 +395,24 @@ public class EmployeeManage {
         System.out.println("Position: " + employee.getPositionType().name());
 
         // Checks if the employee is a Nurse and displays the shift if applicable
-        if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.NURSE) {
+        if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.Nurse) {
             System.out.println("Shift: " + (employee.getShift() != null ? employee.getShift() : "N/A"));
         }
     }
 // Method to display sorted employee details with a limit on the number of displayed employees
 
     public static void displaySortedEmployees(List<Employee> employees, int limit) {
+//      Check if the list its sorted before show the results
+        employees = SortingAlgorithm.mergeSort(employees);
+
         // Displays a header indicating that sorted employees are being listed
         System.out.println("\nSorted employees: \n");
 
         // Loops through employees up to the specified limit or list size
         for (int i = 0; i < limit && i < employees.size(); i++) {
             Employee employee = employees.get(i);
+//          Display the number of the employee in the list (1....20)
+            System.out.println("Employee " + (i + 1) + ":");
             System.out.println("Name: " + employee.getName());
             System.out.println("Date of Birth: " + employee.getDateOfBirth());
             System.out.println("Address: " + employee.getAddress());
@@ -398,7 +422,7 @@ public class EmployeeManage {
             System.out.println("Position: " + employee.getPositionType().name());
 
             // Checks the specific type of the employee and displays additional information accordingly
-            if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.NURSE) {
+            if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.Nurse) {
                 System.out.println("Shift: " + (employee.getShift() != null ? employee.getShift() : "N/A"));
             }
             // Prints a blank line to separate each employee's details
@@ -409,11 +433,11 @@ public class EmployeeManage {
 // Method to handle displaying employee list options
     public static void handleShowEmployeeList(Scanner scanner, List<Employee> employees) {
         // Prompts the user to choose between showing the original or sorted list of employees
-        HospitalMenu.ShowListOption showListOption = HospitalMenuHandler.getShowListOptions(scanner);
+        HospitalMenu.DisplayListOptionEmployees showListOption = HospitalMenuHandler.getShowListOptions(scanner);
 
         // Uses a switch statement to display the list based on user's choice
         switch (showListOption) {
-            case SHOW_ORIGINAL_LIST:
+            case Display_Original_Employee_List:
 
                 if (employees.isEmpty()) {
                     // If the list is empty, displays a message
@@ -421,10 +445,10 @@ public class EmployeeManage {
                 } else {
                     // Otherwise, displays the original list of employees
                     System.out.println("\nOriginal Employee list: ");
-                    displayEmployees(employees);
+                    displayEmployees(employees, 20);
                 }
                 break;
-            case SHOW_SORTED_LIST:
+            case Display_Sorted_Employee_List:
                 if (employees.isEmpty()) {
                     // If the list is empty, displays a message
                     System.out.println("\nThe employee list is empty.");
@@ -486,7 +510,7 @@ public class EmployeeManage {
 
             // Displays the newly generated employees to the user
             System.out.println("\nGenerated employees: \n");
-            displayEmployees(newEmployees); // Calls method to display details of new employees
+            displayEmployees(newEmployees, 20); // Calls method to display details of new employees
 
             // Prints a success message with the count of generated employees
             System.out.println("Generated " + newEmployees.size() + " new employees successfully.");

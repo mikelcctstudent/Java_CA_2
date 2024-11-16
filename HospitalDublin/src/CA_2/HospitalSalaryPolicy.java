@@ -9,6 +9,8 @@ import java.util.EnumMap;
 import java.util.Map;
 
 /**
+ * This lass will managing salary polices for different departments in the
+ * system
  *
  * @author Mikel
  */
@@ -23,14 +25,14 @@ public class HospitalSalaryPolicy { //This class its responsible for the salary 
 //      In this case I decided use EnumMap because is more efficient than other Map implementatitons when using enum keys
 
 //        Fills the map with predefined hourly rates for each departments that I created into the class Department type
-        departmentHourlyRates.put(DepartmentType.DepartmentOption.CARDIOLOGY, BigDecimal.valueOf(50));
-        departmentHourlyRates.put(DepartmentType.DepartmentOption.NEUROLOGY, BigDecimal.valueOf(45));
-        departmentHourlyRates.put(DepartmentType.DepartmentOption.ONCOLOGY, BigDecimal.valueOf(55));
-        departmentHourlyRates.put(DepartmentType.DepartmentOption.EMERGENCY, BigDecimal.valueOf(60));
-        departmentHourlyRates.put(DepartmentType.DepartmentOption.PEDIATRICS, BigDecimal.valueOf(40));
-        departmentHourlyRates.put(DepartmentType.DepartmentOption.ORTHOPEDICS, BigDecimal.valueOf(56));
-        departmentHourlyRates.put(DepartmentType.DepartmentOption.ADMINISTRATION, BigDecimal.valueOf(50));
-        departmentHourlyRates.put(DepartmentType.DepartmentOption.SUPPORT_SERVIVES, BigDecimal.valueOf(45));
+        departmentHourlyRates.put(DepartmentType.DepartmentOption.Cardiology, BigDecimal.valueOf(50));
+        departmentHourlyRates.put(DepartmentType.DepartmentOption.Neurology, BigDecimal.valueOf(45));
+        departmentHourlyRates.put(DepartmentType.DepartmentOption.Oncology, BigDecimal.valueOf(55));
+        departmentHourlyRates.put(DepartmentType.DepartmentOption.Emergency, BigDecimal.valueOf(60));
+        departmentHourlyRates.put(DepartmentType.DepartmentOption.Pediatrics, BigDecimal.valueOf(40));
+        departmentHourlyRates.put(DepartmentType.DepartmentOption.Orthopedics, BigDecimal.valueOf(56));
+        departmentHourlyRates.put(DepartmentType.DepartmentOption.Human_Resources, BigDecimal.valueOf(50));
+        departmentHourlyRates.put(DepartmentType.DepartmentOption.General_Services, BigDecimal.valueOf(45));
 
     }
 //  This method to get the hourly rate for a given department

@@ -4,9 +4,7 @@
  */
 package CA_2;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Method to perform a binary search on a sorted list of Employee objects by

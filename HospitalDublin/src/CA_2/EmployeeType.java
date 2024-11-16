@@ -5,17 +5,17 @@
 package CA_2;// This is the package to which the enum interface EmployeeType belongs
 
 /**
- *
+ *This class is responsible for have the enums for employee option
  * @author Mikel
  */
 public interface EmployeeType {
 //  These are the menu options we would like to present to the user for the employee option    
 
     enum EmployeeOption {
-        GENERAL_STAFF,//0
-        DOCTOR,//1
-        NURSE,//2
-        ADMINISTRATIVE_ASSISTANT//3
+        General_Staff,//0
+        Doctor,//1
+        Nurse,//2
+        Administrative_Assistant//3
     }
 
 }
