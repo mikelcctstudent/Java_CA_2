@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CA_2;// This is the package to which the class HospitalFileManage belongs
 
 import java.io.BufferedReader; // This imports for efficient reading of text from an input stream.
@@ -49,10 +45,10 @@ public class HospitalFileManage {
             LocalDate dateOfBirth = null;
             String address = null;
             BigDecimal salary = null;
-            DepartmentType.DepartmentOption departmentOption = null;
-            RoleType.RoleOption managerOption = null;
-            PositionType.PositionOption positionOption = null;
-            EmployeeType.EmployeeOption employeeType = null;
+            HospitalOptions.DepartmentOption departmentOption = null;
+            HospitalOptions.RoleOption managerOption = null;
+            HospitalOptions.PositionOption positionOption = null;
+            HospitalOptions.EmployeeOption employeeType = null;
 
             // Read each line of the file until the end.
             // Loop through each line of the file
@@ -102,25 +98,25 @@ public class HospitalFileManage {
                     }
                 } else if (line.startsWith("Department: ")) {
                     try {
-                        departmentOption = DepartmentType.DepartmentOption.valueOf(line.substring(12).trim().toUpperCase());
+                        departmentOption = HospitalOptions.DepartmentOption.valueOf(line.substring(12).trim().toUpperCase());
                     } catch (IllegalArgumentException e) {
                         System.out.println("Invalid department type for line: " + line);
                     }
                 } else if (line.startsWith("Role: ")) {
                     try {
-                        managerOption = RoleType.RoleOption.valueOf(line.substring(6).trim().toUpperCase());
+                        managerOption = HospitalOptions.RoleOption.valueOf(line.substring(6).trim().toUpperCase());
                     } catch (IllegalArgumentException e) {
                         System.out.println("Invalid role type for line: " + line);
                     }
                 } else if (line.startsWith("Position: ")) {
                     try {
-                        positionOption = PositionType.PositionOption.valueOf(line.substring(10).trim().toUpperCase());
+                        positionOption = HospitalOptions.PositionOption.valueOf(line.substring(10).trim().toUpperCase());
                     } catch (IllegalArgumentException e) {
                         System.out.println("Invalid position type for line: " + line);
                     }
                 } else if (line.startsWith("Employee Type: ")) {
                     // Parse and set employee type
-                    employeeType = EmployeeType.EmployeeOption.valueOf(line.substring(15).trim().toUpperCase());
+                    employeeType = HospitalOptions.EmployeeOption.valueOf(line.substring(15).trim().toUpperCase());
                 }
             }
 
@@ -161,7 +157,7 @@ public class HospitalFileManage {
             LocalDate dateOfBirth = null;
             String address = null;
             String medicalIssue = null;
-            DepartmentType.DepartmentOption departmentOption = null;
+            HospitalOptions.DepartmentOption departmentOption = null;
             String doctorName = null;
             BigDecimal consultationFee = null;
             LocalDate appointmentDate = null;
@@ -204,7 +200,7 @@ public class HospitalFileManage {
                     medicalIssue = line.substring(15).trim(); // Extract and store the medical issue.
                 } else if (line.startsWith("Medical DepartmentOption: ")) { // Check if the line starts with "Medical DepartmentOption: ".
                     try {
-                        departmentOption = DepartmentType.DepartmentOption.valueOf(line.substring(23).trim().toUpperCase()); // Try to parse the medical department type.
+                        departmentOption = HospitalOptions.DepartmentOption.valueOf(line.substring(23).trim().toUpperCase()); // Try to parse the medical department type.
                     } catch (IllegalArgumentException e) {
                         System.out.println("Invalid department type for line: " + line); // Error message for invalid department type.
                     }
@@ -362,7 +358,7 @@ public class HospitalFileManage {
             writer.write("Type: " + employee.getEmployeeOption().name() + "\n"); // Write employee type
 
             // Check if the employee is a nurse and add shift details if available
-            if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.Nurse) {
+            if (employee.getEmployeeOption() == HospitalOptions.EmployeeOption.Nurse) {
                 writer.write("Shift: " + (employee.getShift() != null ? employee.getShift() : "N/A") + "\n");
             }
 

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CA_2;// This is the package to which the abstract class Department belongs
 
 /**
@@ -16,7 +12,7 @@ public abstract class Department { //I declared one abstract class called depart
 
     private final String name;
 
-    public Department(DepartmentType.DepartmentOption departmentOption) { //Constructor using department type that was created and this constructor  will
+    public Department(HospitalOptions.DepartmentOption departmentOption) { //Constructor using department type that was created and this constructor  will
 //     accepter those parameters 
         departmentOption.name(); // This will initializes the instance variables id using the name of the provided enum
         this.name = departmentOption.name(); // This will initializes the intance for variable name using the name of the provided enum

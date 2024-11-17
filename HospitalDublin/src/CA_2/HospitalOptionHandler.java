@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CA_2;//This the package belongs this class, this will help organize the related classes and amange the project structure
 
 import java.util.Scanner; // Impots the Scanner class to read ser input from the console
@@ -12,7 +8,7 @@ import java.util.Scanner; // Impots the Scanner class to read ser input from the
  *
  * @author Mikel
  */
-public class HospitalMenuHandler {
+public class HospitalOptionHandler {
 //      This is generic method that was created to display a menu and get the user selection
 //      <T extends Enum<T>> mens this method works with any enum type.
 
@@ -48,69 +44,69 @@ public class HospitalMenuHandler {
     }
 //This method to get the main menu options from the user
 
-    public static HospitalMenu.MenuOption getMainOptions(Scanner scanner) {
+    public static HospitalOptions.MenuOption getMainOptions(Scanner scanner) {
 //      Calls the generic getOption method with the main menu options
-        return getOption(scanner, HospitalMenu.MenuOption.values(), "Hospital Management Menu");
+        return getOption(scanner, HospitalOptions.MenuOption.values(), "Hospital Management Menu");
     }
 //This method to get the main sub menu options from the user
 
-    public static HospitalMenu.SubMenuEmployee getEmployeeOption(Scanner scanner) {
+    public static HospitalOptions.SubMenuEmployeeOption getEmployeeOption(Scanner scanner) {
 //      Calls the generic getOption method with the submenu options
-        return getOption(scanner, HospitalMenu.SubMenuEmployee.values(), "Employee Options");
+        return getOption(scanner, HospitalOptions.SubMenuEmployeeOption.values(), "Employee Options");
     }
 
 // Method to get the patient submenu options from the user
-    public static HospitalMenu.SubMenuPatient getPatientOption(Scanner scanner) {
+    public static HospitalOptions.SubMenuPatientOption getPatientOption(Scanner scanner) {
 // Calls the generic getOption method with the patient submenu options
-        return getOption(scanner, HospitalMenu.SubMenuPatient.values(), "Patient Options");
+        return getOption(scanner, HospitalOptions.SubMenuPatientOption.values(), "Patient Options");
     }
 
 // Method to get the sort options from the user
-    public static HospitalMenu.SortOption getSortOptions(Scanner scanner) {
+    public static HospitalOptions.SortOption getSortOptions(Scanner scanner) {
 // Calls the generic getOption method with the sort options
-        return getOption(scanner, HospitalMenu.SortOption.values(), "Sort Options");
+        return getOption(scanner, HospitalOptions.SortOption.values(), "Sort Options");
     }
 
 // Method to get the search options from the user
-    public static HospitalMenu.SearchOption getSearchOptions(Scanner scanner) {
+    public static HospitalOptions.SearchOption getSearchOptions(Scanner scanner) {
 // Calls the generic getOption method with the search options
-        return getOption(scanner, HospitalMenu.SearchOption.values(), "Search Options");
+        return getOption(scanner, HospitalOptions.SearchOption.values(), "Search Options");
     }
 
 // Method to get the show list options for patients from the user
-    public static HospitalMenu.DisplayListOptionPatients getShowListOptionsPatients(Scanner scanner) {
+    public static HospitalOptions.DisplayListOptionPatientsOption getShowListOptionsPatients(Scanner scanner) {
 // Calls the generic getOption method with the show list options for patients
-        return getOption(scanner, HospitalMenu.DisplayListOptionPatients.values(), "Show List Options for Patients");
+        return getOption(scanner, HospitalOptions.DisplayListOptionPatientsOption.values(), "Show List Options for Patients");
     }
 
 // Method to get the show list options from the user
-    public static HospitalMenu.DisplayListOptionEmployees getShowListOptions(Scanner scanner) {
+    public static HospitalOptions.DisplayListOptionEmployeesOption getShowListOptions(Scanner scanner) {
 // Calls the generic getOption method with the show list options
-        return getOption(scanner, HospitalMenu.DisplayListOptionEmployees.values(), "Show List Options");
+        return getOption(scanner, HospitalOptions.DisplayListOptionEmployeesOption.values(), "Show List Options");
     }
 
 // Method to get the employee type options from the user
-    public static EmployeeType.EmployeeOption getEmployeeTypeOption(Scanner scanner) {
+    public static HospitalOptions.EmployeeOption getEmployeeTypeOption(Scanner scanner) {
 // Calls the generic getOption method with the employee type options
-        return getOption(scanner, EmployeeType.EmployeeOption.values(), "Employee Department Options");
+        return getOption(scanner, HospitalOptions.EmployeeOption.values(), "Employee Department Options");
     }
 
 // Method to get the manager type options from the user
-    public static RoleType.RoleOption getManagerTypeOption(Scanner scanner) {
+    public static HospitalOptions.RoleOption getManagerTypeOption(Scanner scanner) {
 // Calls the generic getOption method with the manager type options
-        return getOption(scanner, RoleType.RoleOption.values(), "Role Department Options");
+        return getOption(scanner, HospitalOptions.RoleOption.values(), "Role Department Options");
     }
 
 // Method to get the position type options from the user
-    public static PositionType.PositionOption getPositionTypeOption(Scanner scanner) {
+    public static HospitalOptions.PositionOption getPositionTypeOption(Scanner scanner) {
 // Calls the generic getOption method with the position type options
-        return getOption(scanner, PositionType.PositionOption.values(), "Position Department Options");
+        return getOption(scanner, HospitalOptions.PositionOption.values(), "Position Department Options");
     }
 
 // Method to get the department type options from the user
-    public static DepartmentType.DepartmentOption getDepartmentTypeOption(Scanner scanner) {
+    public static HospitalOptions.DepartmentOption getDepartmentTypeOption(Scanner scanner) {
 // Calls the generic getOption method with the department type options
-        return getOption(scanner, DepartmentType.DepartmentOption.values(), "Department Options");
+        return getOption(scanner, HospitalOptions.DepartmentOption.values(), "Department Options");
     }
 
 }

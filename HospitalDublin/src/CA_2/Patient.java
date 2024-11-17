@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CA_2; // This is the package to which the class Patient belongs 
 
 import java.math.BigDecimal;
@@ -17,7 +13,7 @@ import java.time.LocalTime;
 public class Patient extends Person { //This class called Patient thta will extends the abstract class Person
 
     private final String medicalIssue;// This private instance variable to store the medical issue of the patient
-    private final DepartmentType.DepartmentOption medicalDepartmentOption; //this variable to store the department option from the enum option
+    private final HospitalOptions.DepartmentOption medicalDepartmentOption; //this variable to store the department option from the enum option
     private final String doctorName; // For this private variable to store the name of the doctor.
     private BigDecimal consultationFee;//this private variable to store the date of the appoitment
     private final LocalDate appointmentDate;//This private instance variable to store the date of the patient appointment
@@ -25,7 +21,7 @@ public class Patient extends Person { //This class called Patient thta will exte
     private String medicalInsurancetatus;//variable to store the payment status(paid/unpaid)
 
 //   This Constructor 
-    public Patient(String name, LocalDate dateOfBirth, String address, String medicalIssue, DepartmentType.DepartmentOption medicalDepartmentOption, String doctorName, BigDecimal consultationFee, LocalDate appointmentDate, LocalTime appointmentTime, String paymentStatus) {
+    public Patient(String name, LocalDate dateOfBirth, String address, String medicalIssue, HospitalOptions.DepartmentOption medicalDepartmentOption, String doctorName, BigDecimal consultationFee, LocalDate appointmentDate, LocalTime appointmentTime, String paymentStatus) {
         super(name, dateOfBirth, address);// This calls the parent class Person constructor to initialize name, date of birth, and address
 //      Initializes the medical issue
         this.medicalIssue = medicalIssue;
@@ -49,7 +45,7 @@ public class Patient extends Person { //This class called Patient thta will exte
     }
 //  this method to get the medical department
 
-    public DepartmentType.DepartmentOption getMedicalDepartment() {
+    public HospitalOptions.DepartmentOption getMedicalDepartment() {
         return medicalDepartmentOption;
     }
 //  This method to get the doctors name

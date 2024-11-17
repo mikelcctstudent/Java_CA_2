@@ -1,9 +1,3 @@
-
-/*
-
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CA_2;// This is the package to which the class Hospital belongs
 
 import java.io.File;//This imports the file class, which is used to interact with files in the system.
@@ -54,7 +48,7 @@ public class HospitalApp { //This is the name of the main class
 //          Display main menu options to the user and gets their selection. 
 //          This part will access the class HospitalMenu and select the MenuOption that have the enum and store into the variable
 //          mainOption for use in the switch menu
-            HospitalMenu.MenuOption mainOption = HospitalMenuHandler.getMainOptions(userInput);
+            HospitalOptions.MenuOption mainOption = HospitalOptionHandler.getMainOptions(userInput);
             switch (mainOption) {//Perfoms actions based on the users menu selection
                 case Manage_Employees://If user selects to manage employees
 //                 Thsi I will call the manager employees options

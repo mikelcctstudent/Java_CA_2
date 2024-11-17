@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CA_2;
 
 // Packges that we areusing in this class
@@ -33,7 +29,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         boolean exitSubMenu = false; // Flag to control when to exit the patient management submenu
         while (!exitSubMenu) { // Loop until user chooses to exit
             // Display patient sub-menu options and get user's choice
-            HospitalMenu.SubMenuPatient patientOption = HospitalMenuHandler.getPatientOption(scanner);
+            HospitalOptions.SubMenuPatientOption patientOption = HospitalOptionHandler.getPatientOption(scanner);
 
             // Process the chosen option using a switch statement
             switch (patientOption) {
@@ -95,10 +91,10 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         String medicalIssue = scanner.nextLine().trim();
 
         // Prompt for and select the medical department for the patient
-        DepartmentType.DepartmentOption departmentOption = null;
+        HospitalOptions.DepartmentOption departmentOption = null;
         while (departmentOption == null) { // Loop until a valid option is selected
             System.out.println("Select the medical department:");
-            DepartmentType.DepartmentOption[] departmentDepartmentOptions = DepartmentType.DepartmentOption.values();
+            HospitalOptions.DepartmentOption[] departmentDepartmentOptions = HospitalOptions.DepartmentOption.values();
             for (int i = 0; i < departmentDepartmentOptions.length; i++) {
                 System.out.println((i + 1) + ". " + departmentDepartmentOptions[i].name()); // Display options
             }
@@ -175,10 +171,10 @@ public class PatientManage {// Defines the PatientManage class, which handles th
         String medicalIssue = scanner.nextLine().trim();
 
         // Select medical department for the consultation
-        DepartmentType.DepartmentOption departmentDepartmentOption = null;
+        HospitalOptions.DepartmentOption departmentDepartmentOption = null;
         while (departmentDepartmentOption == null) {
             System.out.println("Select the medical department:");
-            DepartmentType.DepartmentOption[] departmentDepartmentOptions = DepartmentType.DepartmentOption.values();
+            HospitalOptions.DepartmentOption[] departmentDepartmentOptions = HospitalOptions.DepartmentOption.values();
             for (int i = 0; i < departmentDepartmentOptions.length; i++) {
                 System.out.println((i + 1) + ". " + departmentDepartmentOptions[i].name());
             }
@@ -323,9 +319,9 @@ public class PatientManage {// Defines the PatientManage class, which handles th
     // Method to display a list of sorted patients and prompt to export them
     public static void sortOptionsPatients(Scanner scanner, List<Patient> patients, boolean showExportPrompt) {
         // Display sorting options and get user choice
-        HospitalMenu.SortOption sortOption = HospitalMenuHandler.getSortOptions(scanner);
+        HospitalOptions.SortOption sortOption = HospitalOptionHandler.getSortOptions(scanner);
 
-        if (sortOption == HospitalMenu.SortOption.Sort_By_Name) {
+        if (sortOption == HospitalOptions.SortOption.Sort_By_Name) {
             patients = SortingAlgorithm.mergeSortPatients(patients); // Sort_Patients_List patients alphabetically
             displaySortedPatients(patients, 20, scanner); // Display sorted list
 
@@ -345,8 +341,8 @@ public class PatientManage {// Defines the PatientManage class, which handles th
 
     // Method to handle search options for patients and display results
     public static void searchOptionsPatients(Scanner scanner, List<Patient> patients) {
-        HospitalMenu.SearchOption searchOption = HospitalMenuHandler.getSearchOptions(scanner);
-        if (Objects.requireNonNull(searchOption) == HospitalMenu.SearchOption.Search_By_Name) {
+        HospitalOptions.SearchOption searchOption = HospitalOptionHandler.getSearchOptions(scanner);
+        if (Objects.requireNonNull(searchOption) == HospitalOptions.SearchOption.Search_By_Name) {
             try {
                 System.out.print("Enter name to search: ");
                 String patientSearchName = scanner.nextLine().trim();
@@ -405,7 +401,7 @@ public class PatientManage {// Defines the PatientManage class, which handles th
 
     // Method to handle showing different patient lists, like sorted patient lists or appointment lists
     public static void handleShowPatientList(Scanner scanner, List<Patient> patients) {
-        HospitalMenu.DisplayListOptionPatients showListOptionPatient = HospitalMenuHandler.getShowListOptionsPatients(scanner);
+        HospitalOptions.DisplayListOptionPatientsOption showListOptionPatient = HospitalOptionHandler.getShowListOptionsPatients(scanner);
         switch (showListOptionPatient) {
             case Display_Sorted_Patients_List:
 

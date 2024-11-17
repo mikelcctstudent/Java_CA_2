@@ -1,9 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CA_2;
-//This is the packges that we arr uding in this classes
+//This is the packges that we are using in this classes
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,7 +8,10 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * This class I created to be responsible for generating random employee
+ * This class I created to be responsible for generating random employee. In
+ * this case, I have my list of names in a file called "applicants_form.txt"
+ * that I generated all names using the site
+ * https://randomwordgenerator.com/name.php
  *
  * @author Mikel
  */
@@ -21,9 +20,6 @@ public class HospitalDataGenerator {
 
     // A single instance of Random for generating random numbers throughout the class
     private static final Random random = new Random();
-
-    // Instance of HospitalSalaryPolicy for setting employee salaries based on hospital policies
-    private static final HospitalSalaryPolicy salaryPolicy = new HospitalSalaryPolicy();
 
     // Method to generate a list of random employees based on provided names and a specified limit
     public static void generateRandomEmployees(List<Employee> employees, List<String> names, int limit) {
@@ -42,19 +38,19 @@ public class HospitalDataGenerator {
             String address = "Dublin " + (employees.size() + 1);
 
             // Randomly choose the type of employee (e.g., doctor, nurse, admin, etc.)
-            EmployeeType.EmployeeOption employeeType = getRandomEmployeeType();
+            HospitalOptions.EmployeeOption employeeType = getRandomEmployeeType();
 
             // Randomly select a department for the employee based on the chosen employee type
-            DepartmentType.DepartmentOption department = getRandomElement(EmployeeRoleConfig.DEPARTMENT_OPTIONS.get(employeeType));
+            HospitalOptions.DepartmentOption department = getRandomElement(EmployeeRoleConfig.DEPARTMENT_OPTIONS.get(employeeType));
 
             // Randomly select a position for the employee based on the chosen employee type
-            PositionType.PositionOption position = getRandomElement(EmployeeRoleConfig.POSITION_OPTIONS.get(employeeType));
+            HospitalOptions.PositionOption position = getRandomElement(EmployeeRoleConfig.POSITION_OPTIONS.get(employeeType));
 
             // Get a manager role for the employee type to assign a reporting structure
-            RoleType.RoleOption manager = EmployeeRoleConfig.ROLE_OPTIONS.get(employeeType);
+            HospitalOptions.RoleOption manager = EmployeeRoleConfig.ROLE_OPTIONS.get(employeeType);
 
             // Calculate an hourly rate for the employee based on the chosen department
-            BigDecimal hourlyRate = salaryPolicy.getHourlyRate(department);
+            BigDecimal hourlyRate = Salary.getHourlyRateFromDepartment(department);
 
             // Use the hourly rate to create a Salary object which will calculate the employee's salary
             Salary calculatedSalary = new Salary(hourlyRate);
@@ -63,19 +59,20 @@ public class HospitalDataGenerator {
             Employee employee = new Employee(name, dob, address, calculatedSalary, department, manager, position, employeeType);
 
             // Set additional attributes if the employee type is Nurse
-            if (employeeType == EmployeeType.EmployeeOption.Nurse) {
+            if (employeeType == HospitalOptions.EmployeeOption.Nurse) {
                 String shift = getRandomShift(); // Randomly select a shift
                 employee.setShift(shift);
             }
+
             // Add the generated employee to the list of employees
             employees.add(employee);
         }
     }
 
     // Private helper method to randomly select an employee type from available types
-    private static EmployeeType.EmployeeOption getRandomEmployeeType() {
+    private static HospitalOptions.EmployeeOption getRandomEmployeeType() {
         // Get an array of all possible employee types
-        EmployeeType.EmployeeOption[] employeeTypes = EmployeeType.EmployeeOption.values();
+        HospitalOptions.EmployeeOption[] employeeTypes = HospitalOptions.EmployeeOption.values();
 
         // Randomly select and return one employee type from the array
         return employeeTypes[random.nextInt(employeeTypes.length)];
@@ -91,5 +88,4 @@ public class HospitalDataGenerator {
         String[] shifts = {"Morning", "Afternoon", "Night"};
         return shifts[random.nextInt(shifts.length)];
     }
-
 }

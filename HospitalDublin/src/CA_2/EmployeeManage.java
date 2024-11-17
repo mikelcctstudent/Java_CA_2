@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CA_2;
 
 //Packages that Im using in this program
@@ -44,7 +40,7 @@ public class EmployeeManage {
         // Loop that continues to show options until the user chooses to exit
         while (!exitSubMenu) {
             // Get the option selected by the user from the employee submenu
-            HospitalMenu.SubMenuEmployee employeeOption = HospitalMenuHandler.getEmployeeOption(scanner);
+            HospitalOptions.SubMenuEmployeeOption employeeOption = HospitalOptionHandler.getEmployeeOption(scanner);
 
             // Use switch to handle each possible menu option for employee management
             switch (employeeOption) {
@@ -94,10 +90,10 @@ public class EmployeeManage {
         System.out.println("ADD EMPLOYEE Selected: ");
 
         // Prompt the user to choose the employee type using the enum EmployeeType.EmployeeOption
-        EmployeeType.EmployeeOption employeeType = null;
+        HospitalOptions.EmployeeOption employeeType = null;
         while (employeeType == null) { // Loop until a valid choice is made
             System.out.println("Select the employee type:");
-            EmployeeType.EmployeeOption[] employeeEmployeeOptions = EmployeeType.EmployeeOption.values();
+            HospitalOptions.EmployeeOption[] employeeEmployeeOptions = HospitalOptions.EmployeeOption.values();
             for (int i = 0; i < employeeEmployeeOptions.length; i++) {
                 System.out.println((i + 1) + ". " + employeeEmployeeOptions[i].name());
             }
@@ -118,10 +114,10 @@ public class EmployeeManage {
         }
 
         // Prompt the user to choose the department type using DepartmentType.DepartmentOption
-        DepartmentType.DepartmentOption departmentOption = null;
+        HospitalOptions.DepartmentOption departmentOption = null;
         while (departmentOption == null) { // Loop until a valid choice is made
             System.out.println("Select the department type:");
-            DepartmentType.DepartmentOption[] departmentDepartmentOptions = DepartmentType.DepartmentOption.values();
+            HospitalOptions.DepartmentOption[] departmentDepartmentOptions = HospitalOptions.DepartmentOption.values();
             for (int i = 0; i < departmentDepartmentOptions.length; i++) {
                 System.out.println((i + 1) + ". " + departmentDepartmentOptions[i].name());
             }
@@ -142,10 +138,10 @@ public class EmployeeManage {
         }
 
         // Prompt the user to choose the manager type using RoleType.RoleOption
-        RoleType.RoleOption roleOption = null;
+        HospitalOptions.RoleOption roleOption = null;
         while (roleOption == null) { // Loop until a valid choice is made
             System.out.println("Select the role type:");
-            RoleType.RoleOption[] roleOptions = RoleType.RoleOption.values();
+            HospitalOptions.RoleOption[] roleOptions = HospitalOptions.RoleOption.values();
             for (int i = 0; i < roleOptions.length; i++) {
                 System.out.println((i + 1) + ". " + roleOptions[i].name());
             }
@@ -166,10 +162,10 @@ public class EmployeeManage {
         }
 
         // Prompt the user to choose the position type using PositionType.PositionOption
-        PositionType.PositionOption positionPositionOption = null;
+        HospitalOptions.PositionOption positionPositionOption = null;
         while (positionPositionOption == null) { // Loop until a valid choice is made
             System.out.print("Select the position type:");
-            PositionType.PositionOption[] positionPositionOptions = PositionType.PositionOption.values();
+            HospitalOptions.PositionOption[] positionPositionOptions = HospitalOptions.PositionOption.values();
             for (int i = 0; i < positionPositionOptions.length; i++) {
                 System.out.println((i + 1) + ". " + positionPositionOptions[i].name());
             }
@@ -224,7 +220,7 @@ public class EmployeeManage {
         Employee newEmployee = new Employee(name, dateOfBirth, address, salary, departmentOption, roleOption, positionPositionOption, employeeType);
 
         // Set additional attributes based on the specific employee type
-        if (employeeType == EmployeeType.EmployeeOption.Nurse) {
+        if (employeeType == HospitalOptions.EmployeeOption.Nurse) {
             System.out.print("Enter shift: ");
             String shift = scanner.nextLine();
             newEmployee.setShift(shift); // Set shift for nurse
@@ -256,10 +252,10 @@ public class EmployeeManage {
 // Method to display sorting options for employees
     public static void sortOptionsEmployees(Scanner scanner, List<Employee> employees) {
         // Get the sorting option chosen by the user
-        HospitalMenu.SortOption sortOption = HospitalMenuHandler.getSortOptions(scanner);
+        HospitalOptions.SortOption sortOption = HospitalOptionHandler.getSortOptions(scanner);
 
         // Check if the user wants to sort the list alphabetically
-        if (sortOption == HospitalMenu.SortOption.Sort_By_Name) {
+        if (sortOption == HospitalOptions.SortOption.Sort_By_Name) {
             // Perform sorting of the employee list
             employees = SortingAlgorithm.mergeSort(employees);
             displaySortedEmployees(employees, 20);
@@ -283,10 +279,10 @@ public class EmployeeManage {
 // Method to display search options for employees
     public static void searchOptionsEmployees(Scanner scanner, List<Employee> employees) {
         // Get the search option chosen by the user
-        HospitalMenu.SearchOption searchOption = HospitalMenuHandler.getSearchOptions(scanner);
+        HospitalOptions.SearchOption searchOption = HospitalOptionHandler.getSearchOptions(scanner);
 
         // Check if the user wants to search employees by name
-        if (Objects.requireNonNull(searchOption) == HospitalMenu.SearchOption.Search_By_Name) {
+        if (Objects.requireNonNull(searchOption) == HospitalOptions.SearchOption.Search_By_Name) {
             try {
                 System.out.print("Enter name to search: \n");
                 String employeeSearchName = scanner.nextLine().trim();
@@ -377,7 +373,7 @@ public class EmployeeManage {
             System.out.println("Position: " + employee.getPositionType().name());
 
             // Checks the specific type of the employee and displays additional information accordingly
-            if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.Nurse) {
+            if (employee.getEmployeeOption() == HospitalOptions.EmployeeOption.Nurse) {
                 System.out.println("Shift: " + (employee.getShift() != null ? employee.getShift() : "N/A"));
             }
             System.out.println(); // Blank line between employees
@@ -395,7 +391,7 @@ public class EmployeeManage {
         System.out.println("Position: " + employee.getPositionType().name());
 
         // Checks if the employee is a Nurse and displays the shift if applicable
-        if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.Nurse) {
+        if (employee.getEmployeeOption() == HospitalOptions.EmployeeOption.Nurse) {
             System.out.println("Shift: " + (employee.getShift() != null ? employee.getShift() : "N/A"));
         }
     }
@@ -422,7 +418,7 @@ public class EmployeeManage {
             System.out.println("Position: " + employee.getPositionType().name());
 
             // Checks the specific type of the employee and displays additional information accordingly
-            if (employee.getEmployeeOption() == EmployeeType.EmployeeOption.Nurse) {
+            if (employee.getEmployeeOption() == HospitalOptions.EmployeeOption.Nurse) {
                 System.out.println("Shift: " + (employee.getShift() != null ? employee.getShift() : "N/A"));
             }
             // Prints a blank line to separate each employee's details
@@ -433,7 +429,7 @@ public class EmployeeManage {
 // Method to handle displaying employee list options
     public static void handleShowEmployeeList(Scanner scanner, List<Employee> employees) {
         // Prompts the user to choose between showing the original or sorted list of employees
-        HospitalMenu.DisplayListOptionEmployees showListOption = HospitalMenuHandler.getShowListOptions(scanner);
+        HospitalOptions.DisplayListOptionEmployeesOption showListOption = HospitalOptionHandler.getShowListOptions(scanner);
 
         // Uses a switch statement to display the list based on user's choice
         switch (showListOption) {
