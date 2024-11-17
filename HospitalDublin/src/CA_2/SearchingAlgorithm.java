@@ -31,7 +31,7 @@ public class SearchingAlgorithm {
 // Public method to start the recursive search for employees by name, allowing partial matches
     public static String searchEmployeesByName(List<Employee> employees, String name) {
         String result = searchEmployeesByNameRecursive(employees, name, 0, employees.size() - 1).trim();
-        return result.isEmpty() ? "Employee not found." : result;
+        return result.isEmpty() ? "\nEmployee not found." : "\nEmployee Found:\n" + result; // if employee not found or found will return this message 
     }
 
     private static String searchEmployeesByNameRecursive(List<Employee> employees, String name, int low, int high) {
@@ -59,7 +59,7 @@ public class SearchingAlgorithm {
 // Public method to start the recursive search for a patient by name
     public static String searchPatientsByName(List<Patient> patients, String name) {
         String result = searchPatientsByNameRecursive(patients, name, 0, patients.size() - 1).trim();
-        return result.isEmpty() ? "Patient not found." : result;
+        return result.isEmpty() ? "\nPatient not found." : "\nPatient Found:\n" + result;//the same for patient if found or not will return the message
     }
 
 // Private recursive method to perform the binary search with partial match accumulation

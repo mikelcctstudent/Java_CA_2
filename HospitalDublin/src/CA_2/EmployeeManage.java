@@ -288,9 +288,8 @@ public class EmployeeManage {
         // Check if the user wants to search employees by name
         if (Objects.requireNonNull(searchOption) == HospitalOptions.SearchOption.Search_By_Name) {
             try {
-                System.out.print("Enter name to search: \n");
+                System.out.print("Enter name to search: ");
                 String employeeSearchName = scanner.nextLine().trim();
-
                 // Sort the employee list first to ensure a faster and more accurate search
                 employees = SortingAlgorithm.mergeSort(employees);
 
@@ -384,7 +383,7 @@ public class EmployeeManage {
         }
     }
 
-// Method to display details of a single employee
+// Method to display details of a single employeeapp
     public static void displayEmployeeDetails(Employee employee) {
         System.out.println("Name: " + employee.getName());
         System.out.println("Date of Birth: " + employee.getDateOfBirth());

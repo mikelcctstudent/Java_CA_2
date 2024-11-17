@@ -7,7 +7,7 @@ package CA_2;//This the package belongs this class, this will help organize the 
 import java.util.Scanner; // Impots the Scanner class to read ser input from the console
 
 /**
- * Class to handler the various menu options in the Hospital application
+ * This class to handler the various menu options in the Hospital application
  * Provides methods to get and display menu options for users to select
  *
  * @author Mikel

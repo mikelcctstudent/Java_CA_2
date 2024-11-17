@@ -2,73 +2,74 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package CA_2;// Declares the package name where this class belongs
+package CA_2;
 
-import java.util.Map; // Import statement for using the Map interface
+import java.util.Map;
 
 /**
- * This class will be responsible for defining mapping between employee types,
- * departments, positions, and roles, and this will help ensure that each
- * employee type is associated with the appropriate type in the system.
+ * This class defines mappings between employee types, departments, positions,
+ * and roles. It acts as a configuration class to ensure that only valid
+ * combinations of these attributes are used within the system.
  *
- * @author Mikel
+ * Author: Mikel
  */
-public class EmployeeRoleConfig {// Class to map coherent combinations between EmployeeType, Department, Position, and Role
+public class EmployeeRoleConfig {
 
-    // A public static final Map that links each EmployeeType.EmployeeOption to an array of appropriate DepartmentType.DepartmentOption(s)
-    public static final Map<HospitalOptions.EmployeeOption, HospitalOptions.DepartmentOption[]> DEPARTMENT_OPTIONS = Map.of(// For EmployeeType Doctor, associate the departments: Cardiology, Neurology, Oncology
+    // Map defining valid department options for each employee type
+    public static final Map<HospitalOptions.EmployeeOption, HospitalOptions.DepartmentOption[]> DEPARTMENT_OPTIONS = Map.of(
+            // For doctors, the valid departments include Cardiology, Neurology, Oncology, and Emergency
             HospitalOptions.EmployeeOption.Doctor, new HospitalOptions.DepartmentOption[]{
                 HospitalOptions.DepartmentOption.Cardiology,
                 HospitalOptions.DepartmentOption.Neurology,
                 HospitalOptions.DepartmentOption.Oncology,
                 HospitalOptions.DepartmentOption.Emergency
             },
-            // For EmployeeType Nurse, associate the departments: Pediatrics, Emergency, Orthopedics
+            // For nurses, the valid departments include Pediatrics, Emergency, and Orthopedics
             HospitalOptions.EmployeeOption.Nurse, new HospitalOptions.DepartmentOption[]{
                 HospitalOptions.DepartmentOption.Pediatrics,
                 HospitalOptions.DepartmentOption.Emergency,
                 HospitalOptions.DepartmentOption.Orthopedics
             },
-            // For EmployeeType Administrative_Assistant, associate the department: Human_Resources
+            // For administrative assistants, the only valid department is Human Resources
             HospitalOptions.EmployeeOption.Administrative_Assistant, new HospitalOptions.DepartmentOption[]{
                 HospitalOptions.DepartmentOption.Human_Resources
             },
-            // For EmployeeType General_Staff, associate the departments: Emergency, Human_Resources, SUPPORT_SERVICES
+            // For general staff, the only valid department is General Services
             HospitalOptions.EmployeeOption.General_Staff, new HospitalOptions.DepartmentOption[]{
-                HospitalOptions.DepartmentOption.Human_Resources,
                 HospitalOptions.DepartmentOption.General_Services
             }
     );
 
-    // A public static final Map that links each EmployeeType.EmployeeOption to an array of appropriate PositionType.PositionOption(s)
-    public static final Map<HospitalOptions.EmployeeOption, HospitalOptions.PositionOption[]> POSITION_OPTIONS = Map.of(// For EmployeeType Doctor, associate the positions: Surgeon, Geriatric_Medicine
+    // Map defining valid role options (managerial roles) for each employee type
+    public static final Map<HospitalOptions.EmployeeOption, HospitalOptions.RoleOption> ROLE_OPTIONS = Map.of(
+            // Doctors are managed by a Medical Director
+            HospitalOptions.EmployeeOption.Doctor, HospitalOptions.RoleOption.Medical_Director,
+            // Nurses are managed by a Nurse Administrator
+            HospitalOptions.EmployeeOption.Nurse, HospitalOptions.RoleOption.Nurse_Administrator,
+            // Administrative assistants are managed by an HR Manager
+            HospitalOptions.EmployeeOption.Administrative_Assistant, HospitalOptions.RoleOption.HR_Manager,
+            // General staff are managed by a Supervisor
+            HospitalOptions.EmployeeOption.General_Staff, HospitalOptions.RoleOption.Supervisor
+    );
+
+    // Map defining valid position options for each employee type
+    public static final Map<HospitalOptions.EmployeeOption, HospitalOptions.PositionOption[]> POSITION_OPTIONS = Map.of(
+            // Doctors can take on positions like Surgeon or Geriatric Medicine specialist
             HospitalOptions.EmployeeOption.Doctor, new HospitalOptions.PositionOption[]{
                 HospitalOptions.PositionOption.Surgeon,
                 HospitalOptions.PositionOption.Geriatric_Medicine
             },
-            // For EmployeeType Nurse, associate the position: Radiology_Nurse
+            // Nurses can only hold the position of Radiology Nurse
             HospitalOptions.EmployeeOption.Nurse, new HospitalOptions.PositionOption[]{
                 HospitalOptions.PositionOption.Radiology_Nurse
             },
-            // For EmployeeType Administrative_Assistant, associate the position: Administrative_Assistant
+            // Administrative assistants can only hold the position of Administrative Assistant
             HospitalOptions.EmployeeOption.Administrative_Assistant, new HospitalOptions.PositionOption[]{
                 HospitalOptions.PositionOption.Administrative_Assistant
             },
-            // For EmployeeType General_Staff, associate the position: Cleaner
+            // General staff can only hold the position of Cleaner
             HospitalOptions.EmployeeOption.General_Staff, new HospitalOptions.PositionOption[]{
                 HospitalOptions.PositionOption.Cleaner
             }
     );
-
-    // A public static final Map that links each EmployeeType.EmployeeOption to a specific RoleType.RoleOption (manager role)
-    public static final Map<HospitalOptions.EmployeeOption, HospitalOptions.RoleOption> ROLE_OPTIONS = Map.of(// For EmployeeType Doctor, the manager is Medical_Director
-            HospitalOptions.EmployeeOption.Doctor, HospitalOptions.RoleOption.Medical_Director,
-            // For EmployeeType Nurse, the manager is Nurse_Administrator
-            HospitalOptions.EmployeeOption.Nurse, HospitalOptions.RoleOption.Nurse_Administrator,
-            // For EmployeeType Administrative_Assistant, the manager is HR_Manager
-            HospitalOptions.EmployeeOption.Administrative_Assistant, HospitalOptions.RoleOption.HR_Manager,
-            // For EmployeeType General_Staff, the manager is General_Manager
-            HospitalOptions.EmployeeOption.General_Staff, HospitalOptions.RoleOption.General_Manager
-    );
-
 }

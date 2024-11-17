@@ -14,6 +14,7 @@ import java.util.Scanner;//This imports userInput to read user input from the co
  * The main method will employ the logic to process the users choice by
  * providing Some menu options based on the enums in the interface. Asking for
  * read the name of the file "applicants_form.txt" before handling all options
+ * The file was generated with first name and followed with the second name.
  *
  * @author Mikel
  */
@@ -80,7 +81,7 @@ public class HospitalApp { //This is the name of the main class
     public static String askForFileName(Scanner scanner) {
         String filename;// Variable to hold the file name input by the user.
         while (true) { // Infite loop until a valid file name is provided
-            System.out.print("Please enter the filename to read: ");//Prompts user input.
+            System.out.print("Please enter the filename to read (Applicants_Form.txt): ");//Prompts user input.
             filename = scanner.nextLine();//Reads the file name from the users input
             File file = new File(filename);//Creates a file object to check if the file exists.
             if (file.exists() && file.isFile()) { // Checks if the file indeed exists and is a file

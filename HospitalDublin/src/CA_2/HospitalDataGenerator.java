@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package CA_2;
-//This is the packges that we are using in this classes
+//In this part it was import that we are going to use in this class
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,82 +12,78 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * This class I created to be responsible for generating random employee. In
- * this case, I have my list of names in a file called "applicants_form.txt"
- * that I generated all names using the site
- * https://randomwordgenerator.com/name.php
+ * This class is responsible for generating random employees based on predefined
+ * configurations. It ensures consistency by utilizing mappings and methods
+ * defined in EmployeeRoleConfig.
  *
  * @author Mikel
  */
-// Defines a class to generate random hospital employee data
 public class HospitalDataGenerator {
 
-    // A single instance of Random for generating random numbers throughout the class
+    // A single instance of Random for generating random values
     private static final Random random = new Random();
 
-    // Method to generate a list of random employees based on provided names and a specified limit
+    /**
+     * This method will generates a list of random employees based on provided
+     * names and a specified limit.
+     */
     public static void generateRandomEmployees(List<Employee> employees, List<String> names, int limit) {
-        // Making a copy of the provided names list to avoid modifying the original
+        // Copy of names to ensure unique selection
         List<String> availableNames = new ArrayList<>(names);
 
-        // Loop until we reach the limit or run out of names
+        // Generate employees up to the specified limit or until names run out
         for (int i = 0; i < limit && !availableNames.isEmpty(); i++) {
-            // Randomly select a name from the available names list and remove it to prevent reuse
+            // Randomly select and remove a name
             String name = availableNames.remove(random.nextInt(availableNames.size()));
 
-            // Generate a random date of birth, assigning an age between 20 and 50 years
+            // Generate a random date of birth (age between 20 and 50)
             LocalDate dob = LocalDate.now().minusYears(20 + random.nextInt(30));
 
-            // Generate a basic address for the employee with a unique identifier
+            // Generate a simple address for the employee
             String address = "Dublin " + (employees.size() + 1);
 
-            // Randomly choose the type of employee (e.g., doctor, nurse, admin, etc.)
+            // Randomly determine the type of employee
             HospitalOptions.EmployeeOption employeeType = getRandomEmployeeType();
 
-            // Randomly select a department for the employee based on the chosen employee type
+            // Select a random department for the employee
             HospitalOptions.DepartmentOption department = getRandomElement(EmployeeRoleConfig.DEPARTMENT_OPTIONS.get(employeeType));
 
-            // Randomly select a position for the employee based on the chosen employee type
+            // Select a random position for the employee
             HospitalOptions.PositionOption position = getRandomElement(EmployeeRoleConfig.POSITION_OPTIONS.get(employeeType));
 
-            // Get a manager role for the employee type to assign a reporting structure
+            // Retrieve the manager role for the employee type
             HospitalOptions.RoleOption manager = EmployeeRoleConfig.ROLE_OPTIONS.get(employeeType);
 
-            // Calculate an hourly rate for the employee based on the chosen department
+            // Calculate the salary based on department and manager role
             BigDecimal hourlyRate = Salary.getHourlyRateFromDepartment(department);
-
-            // Use the hourly rate to create a Salary object which will calculate the employee's salary
             Salary calculatedSalary = new Salary(hourlyRate);
 
-            // Create a new Employee with the generated attributes and calculated salary
+            // Create the Employee object
             Employee employee = new Employee(name, dob, address, calculatedSalary, department, manager, position, employeeType);
 
-            // Set additional attributes if the employee type is Nurse
+            // Set additional attributes for specific employee types (e.g., Nurses)
             if (employeeType == HospitalOptions.EmployeeOption.Nurse) {
-                String shift = getRandomShift(); // Randomly select a shift
+                String shift = getRandomShift();
                 employee.setShift(shift);
             }
 
-            // Add the generated employee to the list of employees
+            // Add the generated employee to the list
             employees.add(employee);
         }
     }
 
-    // Private helper method to randomly select an employee type from available types
+    // Private method to randomly select an employee type
     private static HospitalOptions.EmployeeOption getRandomEmployeeType() {
-        // Get an array of all possible employee types
         HospitalOptions.EmployeeOption[] employeeTypes = HospitalOptions.EmployeeOption.values();
-
-        // Randomly select and return one employee type from the array
         return employeeTypes[random.nextInt(employeeTypes.length)];
     }
 
-    // Generic method to randomly select an element from an array of options
+    // Generic method to select a random element from an array
     private static <T> T getRandomElement(T[] options) {
-        // Randomly select and return an element from the array provided
         return options[random.nextInt(options.length)];
     }
 
+    // Method to randomly select a shift
     private static String getRandomShift() {
         String[] shifts = {"Morning", "Afternoon", "Night"};
         return shifts[random.nextInt(shifts.length)];

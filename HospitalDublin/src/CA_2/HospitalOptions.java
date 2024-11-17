@@ -61,7 +61,8 @@ public class HospitalOptions {
         Nurse_Administrator, // 1 - Manages nursing staff and their schedules
         Medical_Director, // 2 - Responsible for medical decisions and policies
         HR_Manager, // 3 - Manages recruitment, training, and HR policies
-        Clinical_Manager         // 4 - Supervises clinical operations and patient care
+        Clinical_Manager,         // 4 - Supervises clinical operations and patient care
+        Supervisor // 5 - Supervisor for cleaner, etc
     }
 
 //     Enum for main menu options These are the menu options we would like to
