@@ -6,7 +6,7 @@ package CA_2;// This is the package to which the interface PositionType belongs
 
 /**
  *
- * This class will have all the enums for position type
+ * This interface class will have all the enums for position type
  *
  * @author Mikel
  */

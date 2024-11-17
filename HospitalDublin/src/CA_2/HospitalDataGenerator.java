@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package CA_2;
+//This is the packges that we arr uding in this classes
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -26,7 +27,7 @@ public class HospitalDataGenerator {
 
     // Method to generate a list of random employees based on provided names and a specified limit
     public static void generateRandomEmployees(List<Employee> employees, List<String> names, int limit) {
-        // Make a copy of the provided names list to avoid modifying the original
+        // Making a copy of the provided names list to avoid modifying the original
         List<String> availableNames = new ArrayList<>(names);
 
         // Loop until we reach the limit or run out of names

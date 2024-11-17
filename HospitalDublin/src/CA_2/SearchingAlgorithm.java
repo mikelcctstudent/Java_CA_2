@@ -7,11 +7,22 @@ package CA_2;
 import java.util.List;
 
 /**
- * Method to perform a binary search on a sorted list of Employee objects by
- * name. If the name is found (even partially), it returns a formatted string of
- * the Employee details. If no match is found, it returns a message indicating
- * that the employee was not found. This method does not use StringBuilder and
- * allows partial name matches.
+ * This class will perform a binary search on a sorted list of Employee objects
+ * by name. If the name is found (even partially), it returns a formatted string
+ * of the Employee details. If no match is found, it returns a message
+ * indicating that the employee was not found. In this case the binary search
+ * algorithm was chosen because it is very fast for searching through sorted
+ * lists, such as the list of employees or patients in the hospital system. It
+ * allows results to be located quickly, even in large lists, saving operators
+ * time. Additionally, it was adapted to search for partial names, which is
+ * practical in situations where the operator doesn't know the full name, making
+ * the system easier to use. Other options, like linear search, were dismissed
+ * because they would be slower, especially with larger lists, as they would
+ * need to check each entry one by one. Binary search, combined with the
+ * presorting of the list (using Merge Sort), ensures the system operates more
+ * efficiently and simply, without complicating the logic or requiring more
+ * resources than necessary. This is essential to meet the hospital's demands
+ * and provide a practical experience for users.
  *
  * @author Mikel
  */
@@ -85,7 +96,7 @@ public class SearchingAlgorithm {
                 + (patient.getConsultationFee() != null ? "\nConsultation Fee: " + patient.getConsultationFee() : "");
     }
 
-    // Helper method to format and return employee details as a string
+    // This method helper method to format and return employee details as a string
     public static String employeeDetails(Employee employee) {
         return "\nName: " + employee.getName() + "\n"
                 + "Date of Birth: " + employee.getDateOfBirth() + "\n"

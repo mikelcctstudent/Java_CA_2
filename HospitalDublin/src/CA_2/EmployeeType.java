@@ -5,7 +5,8 @@
 package CA_2;// This is the package to which the enum interface EmployeeType belongs
 
 /**
- *This class is responsible for have the enums for employee option
+ * This interface class is responsible for have the enums for employee option
+ *
  * @author Mikel
  */
 public interface EmployeeType {

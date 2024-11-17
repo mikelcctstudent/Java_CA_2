@@ -1,4 +1,6 @@
+
 /*
+
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -12,7 +14,8 @@ import java.util.Scanner;//This imports userInput to read user input from the co
 
 /**
  * The main method will employ the logic to process the users choice by
- * providing Some menu options based on the enums in the interface.
+ * providing Some menu options based on the enums in the interface. Asking for
+ * read the name of the file "applicants_form.txt" before handling all options
  *
  * @author Mikel
  */
@@ -55,7 +58,7 @@ public class HospitalApp { //This is the name of the main class
             switch (mainOption) {//Perfoms actions based on the users menu selection
                 case Manage_Employees://If user selects to manage employees
 //                 Thsi I will call the manager employees options
-                   EmployeeManage.manageEmployees(userInput, employees, applicants, applicantsFormFromFile);
+                    EmployeeManage.manageEmployees(userInput, employees, applicants, applicantsFormFromFile);
                     break;
                 case Manage_Patients://If user selects to manage patients.
                     try {
@@ -120,6 +123,7 @@ public class HospitalApp { //This is the name of the main class
         return response; // returns the valid response
     }
 //  This method its for clean all data from the file when is executed the program
+
     public static void clearAllDataFiles() {
         HospitalFileManage.clearAllFiles(EMPLOYEE_FILE);
         HospitalFileManage.clearAllFiles(SORTED_EMPLOYEES_FILE);

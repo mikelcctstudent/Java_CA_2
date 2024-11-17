@@ -3,19 +3,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package CA_2;
+//This are the imports that we use in this class
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Method to perform a merge sort on a list of Employee objects by name. This
- * method divides the list into smaller sublists, recursively sorts each
- * sublist, and then merges them back together in sorted order. Sorting is
- * performed in a case-insensitive manner to ensure consistency in the results,
- * especially for names with mixed capitalization.
+ * This method divides the list into smaller sub lists, recursively sorts each
+ * sub list, and then merges them back together in sorted order. In this case
+ * the sort is performed in a case-insensitive manner to ensure consistency in
+ * the results, especially for names with mixed capitalization. The method uses
+ * the "divide and conquer" approach of merge sort, making it efficient for
+ * large lists with a time complexity of O(n log n). In the hospital management
+ * system, we chose Merge Sort for sorting employee and patient lists because it
+ * provides a perfect balance of efficiency and reliability. Since the system
+ * deals with potentially large data sets, Merge Sort will ensures optimal
+ * performance with its O(n log n) complexity, making it suitable for handling
+ * the sorting of numerous records efficiently. Another critical reason is that
+ * Merge Sort is a stable algorithm, meaning that it maintains the relative
+ * order of entries with the same key (in this case, names). This is especially
+ * important in a hospital context where multiple employees or patients might
+ * share the same name. For instance, if two nurses named "Mikel Pinto" work in
+ * different departments, Merge Sort ensures their respective information
+ * remains intact and correctly ordered, will avoiding any confusion. Other
+ * sorting algorithms, such as Quick Sort, were considered, but Quick Sort is
+ * not stable and could disrupt the ordering of records with duplicate names.
+ * While Heap Sort is efficient, it does not guarantee stability, which is
+ * essential for our system to preserve data integrity. Merge Sort is also easy
+ * to integrate into the project's structure, allowing seamless recursive
+ * division of the list into smaller sub lists and subsequent merging. This
+ * approach ensures that names are alphabetically sorted, simplifying searches
+ * and maintaining consistency. Alternative algorithms like Bubble Sort were
+ * discarded because they are too slow for large data sets and do not align with
+ * the system's requirements.
  *
- * The method uses the "divide and conquer" approach of merge sort, making it
- * efficient for large lists with a time complexity of O(n log n).
  *
  * @author Mikel
  */
