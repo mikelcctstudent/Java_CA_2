@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package CA_2;//This the package belongs this class, this will help organize the related classes and amange the project structure
 
 import java.util.Scanner; // Impots the Scanner class to read ser input from the console

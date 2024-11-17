@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package CA_2;// This is the package to which the class Hospital belongs
 
 import java.io.File;//This imports the file class, which is used to interact with files in the system.
